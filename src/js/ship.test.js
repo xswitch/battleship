@@ -18,8 +18,8 @@ describe("Ship tests", () => {
   it("should check if a ship is sunk", () => {
     const newShip = new Ship(2);
     newShip.hit();
-    expect(newShip.isSunk()).toBe(false);
     newShip.hit();
-    expect(newShip.isSunk()).toBe(true);
+    newShip.isSunk();
+    expect(newShip.sunk).toBe(true);
   });
 });

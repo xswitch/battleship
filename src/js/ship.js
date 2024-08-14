@@ -6,12 +6,11 @@ class Ship {
   }
 
   hit() {
-    if (this.timesHit <= this.length) this.timesHit += 1;
-    if (this.timesHit >= this.length) this.sunk = true;
+    if (this.sunk === false) this.timesHit += 1;
   }
 
   isSunk() {
-    return this.sunk;
+    if (this.timesHit >= this.length) this.sunk = true;
   }
 }
 
