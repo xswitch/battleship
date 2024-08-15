@@ -4,7 +4,13 @@ class GameBoard {
   }
 
   placeShip(coords) {
-    if (this.placedCoords.includes(coords)) return false;
+    if (
+      this.placedCoords.filter(
+        (current) => current[0] === coords[0] && current[1] === coords[1],
+      ).length !== 0
+    ) {
+      return false;
+    }
     this.placedCoords.push(coords);
     return true;
   }
