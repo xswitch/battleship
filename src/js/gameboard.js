@@ -6,9 +6,14 @@ class GameBoard {
     });
   }
 
+  checkCoordinates(coordinates) {
+    if (this.board[coordinates[0]][coordinates[1]] !== undefined) return false; // If ship at coordinates, return false
+    return true;
+  }
+
   placeShip(coords, ship) {
-    if (this.board[coords[0]][coords[1]] !== undefined) return false;
-    this.board[coords[0]][coords[1]] = { ship, x: coords[0], y: coords[1] };
+    if (!this.checkCoordinates(coords)) return false; // If ship at coordinates, return false
+    this.board[coords[0]][coords[1]] = { ship, x: coords[0], y: coords[1] }; // If not, push
     return true;
   }
 }
