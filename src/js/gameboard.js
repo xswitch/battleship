@@ -3,15 +3,15 @@ class GameBoard {
     this.placedCoords = [];
   }
 
-  placeShip(coords) {
+  placeShip(coords, ship) {
     if (
       this.placedCoords.filter(
-        (current) => current[0] === coords[0] && current[1] === coords[1],
+        (current) => current.x === coords[0] && current.y === coords[1],
       ).length !== 0
     ) {
       return false;
     }
-    this.placedCoords.push(coords);
+    this.placedCoords.push({ ship, x: coords[0], y: coords[1] });
     return true;
   }
 }
