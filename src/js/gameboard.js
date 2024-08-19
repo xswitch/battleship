@@ -1,17 +1,14 @@
 class GameBoard {
   constructor() {
-    this.placedCoords = [];
+    this.board = [...Array(10)];
+    this.board.forEach((entry, index) => {
+      this.board[index] = [...Array(10)];
+    });
   }
 
   placeShip(coords, ship) {
-    if (
-      this.placedCoords.filter(
-        (current) => current.x === coords[0] && current.y === coords[1],
-      ).length !== 0
-    ) {
-      return false;
-    }
-    this.placedCoords.push({ ship, x: coords[0], y: coords[1] });
+    if (this.board[coords[0]][coords[1]] !== undefined) return false;
+    this.board[coords[0]][coords[1]] = { ship, x: coords[0], y: coords[1] };
     return true;
   }
 }
