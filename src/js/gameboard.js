@@ -11,17 +11,17 @@ class GameBoard {
     return true;
   }
 
-  placeShip(coords, ship) {
+  placeShip(coords, ship, direction = "x") {
     for (let i = 0; i < ship.length; i += 1) {
       if (!this.checkCoordinates(coords)) return false;
     }
     for (let i = 0; i < ship.length; i += 1) {
-      this.board[coords[0] + i][coords[1]] = {
-        ship,
-        x: coords[0],
-        y: coords[1],
-      }; // If not, push
-    }
+      if (direction === "x") {
+        this.board[coords[0] + i][coords[1]] = ship;
+      } else {
+        this.board[coords[0]][coords[1] + i] = ship;
+      }
+    } // If not, push
     return true;
   }
 }
