@@ -21,8 +21,14 @@ class GameBoard {
       } else {
         this.board[coords[0]][coords[1] + i] = ship;
       }
-    } // If not, push
+    }
     return true;
+  }
+
+  receiveAttack(coordinates) {
+    if (!this.checkCoordinates(coordinates)) {
+      this.board[coordinates[0]][coordinates[1]].hit();
+    }
   }
 }
 

@@ -29,4 +29,9 @@ describe("Gameboard class", () => {
     console.log(gameBoard.board);
     expect(gameBoard.checkCoordinates([0, 3])).toBe(false);
   });
+
+  it("should send hit to ship if in position", () => {
+    gameBoard.receiveAttack([0, 0]);
+    expect(gameBoard.board[0][0].timesHit).toBe(1);
+  });
 });
