@@ -12,8 +12,16 @@ class GameBoard {
   }
 
   placeShip(coords, ship) {
-    if (!this.checkCoordinates(coords)) return false; // If ship at coordinates, return false
-    this.board[coords[0]][coords[1]] = { ship, x: coords[0], y: coords[1] }; // If not, push
+    for (let i = 0; i < ship.length; i += 1) {
+      if (!this.checkCoordinates(coords)) return false;
+    }
+    for (let i = 0; i < ship.length; i += 1) {
+      this.board[coords[0] + i][coords[1]] = {
+        ship,
+        x: coords[0],
+        y: coords[1],
+      }; // If not, push
+    }
     return true;
   }
 }
