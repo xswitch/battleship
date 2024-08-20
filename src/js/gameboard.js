@@ -8,7 +8,12 @@ class GameBoard {
   checkForShip(coordinates) {
     let shipInLocation = false;
     this.ships.forEach((ship) => {
-      if (ship.x === coordinates[0] && ship.y === coordinates[1])
+      if (
+        coordinates[0] >= ship.x &&
+        coordinates[1] >= ship.y &&
+        coordinates[0] <= ship.xMax &&
+        coordinates[1] <= ship.yMax
+      )
         shipInLocation = ship;
     });
     return shipInLocation;
@@ -29,7 +34,21 @@ class GameBoard {
 
   placeShip(coords, ship, direction = "x") {
     if (this.checkForShip(coords) !== false) return false;
-    this.ships.push({ x: coords[0], y: coords[1], ship, direction });
+    let xMax = coords[0];
+    let yMax = coords[1];
+    if (direction === "x") {
+      xMax += ship.length;
+    } else if (direction === "y") {
+      yMax += ship.length;
+    }
+    this.ships.push({
+      x: coords[0],
+      y: coords[1],
+      xMax,
+      yMax,
+      ship,
+      direction,
+    });
     return true;
   }
 
@@ -42,6 +61,7 @@ class GameBoard {
       ship.hit();
       this.hits.push(coordinates);
     }
+    return true;
   }
 
   allSunk() {
@@ -49,8 +69,6 @@ class GameBoard {
       return true;
     return false;
   }
-
-  getMisses() {}
 }
 
 export default GameBoard;
