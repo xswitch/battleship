@@ -45,4 +45,8 @@ describe("Gameboard class", () => {
     gameBoard.receiveAttack([1, 0]);
     expect(gameBoard.ships[0].ship.timesHit).toBe(2);
   });
+
+  it("should not place out of bounds", () => {
+    expect(gameBoard.placeShip([9, 0], new Ship(5))).toBe(false);
+  });
 });

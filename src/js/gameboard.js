@@ -34,6 +34,8 @@ class GameBoard {
 
   placeShip(coords, ship, direction = "x") {
     if (this.checkForShip(coords) !== false) return false;
+    if ((coords[0] + ship.length > 10) | (coords[1] + ship.length > 10))
+      return false;
     let xMax = coords[0];
     let yMax = coords[1];
     if (direction === "x") {
