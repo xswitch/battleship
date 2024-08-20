@@ -1,35 +1,56 @@
 class GameBoard {
   constructor() {
-    this.board = [...Array(10)];
-    this.board.forEach((entry, index) => {
-      this.board[index] = [...Array(10)];
-    });
+    this.ships = [];
+    this.hits = [];
+    this.misses = [];
   }
 
-  checkCoordinates(coordinates) {
-    if (this.board[coordinates[0]][coordinates[1]] !== undefined) return false; // If ship at coordinates, return false
-    return true;
+  checkForShip(coordinates) {
+    let shipInLocation = false;
+    this.ships.forEach((ship) => {
+      if (ship.x === coordinates[0] && ship.y === coordinates[1])
+        shipInLocation = ship;
+    });
+    return shipInLocation;
+  }
+
+  isAlreadyUsed(coordinates) {
+    const matchingHits = this.hits.filter(
+      (hitsCords) =>
+        hitsCords[0] === coordinates[0] && hitsCords[1] === coordinates[1],
+    );
+    const matchingMiss = this.misses.filter(
+      (missCords) =>
+        missCords[0] === coordinates[0] && missCords[1] === coordinates[1],
+    );
+    if (matchingHits.length > 0 || matchingMiss.length > 0) return true;
+    return false;
   }
 
   placeShip(coords, ship, direction = "x") {
-    for (let i = 0; i < ship.length; i += 1) {
-      if (!this.checkCoordinates(coords)) return false;
-    }
-    for (let i = 0; i < ship.length; i += 1) {
-      if (direction === "x") {
-        this.board[coords[0] + i][coords[1]] = ship;
-      } else {
-        this.board[coords[0]][coords[1] + i] = ship;
-      }
-    }
+    if (this.checkForShip(coords) !== false) return false;
+    this.ships.push({ x: coords[0], y: coords[1], ship, direction });
     return true;
   }
 
   receiveAttack(coordinates) {
-    if (!this.checkCoordinates(coordinates)) {
-      this.board[coordinates[0]][coordinates[1]].hit();
+    if (this.isAlreadyUsed(coordinates)) return false;
+    const { ship } = this.checkForShip(coordinates);
+    if (ship === undefined) {
+      this.misses.push(coordinates);
+    } else {
+      ship.hit();
+      this.hits.push(coordinates);
     }
   }
+
+  allSunk() {
+    if (this.ships.filter((shipEntry) => !shipEntry.ship.sunk).length === 0)
+      return true;
+    return false;
+  }
+
+  getMisses() {}
 }
 
 export default GameBoard;

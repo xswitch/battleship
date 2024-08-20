@@ -7,6 +7,7 @@ class Ship {
 
   hit() {
     if (this.sunk === false) this.timesHit += 1;
+    this.isSunk();
   }
 
   isSunk() {
