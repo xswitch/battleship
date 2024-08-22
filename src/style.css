@@ -1,4 +1,10 @@
-div {
-  color: orange;
-  font-size: 5rem;
+* {
+  margin: 0px;
+  border: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100dvh;
+  background-color: black;
 }
