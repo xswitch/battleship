@@ -6,14 +6,13 @@ describe("Gameboard class", () => {
   const gameBoard = new GameBoard();
   gameBoard.placeShip([0, 0], new Ship(3), "x");
   gameBoard.placeShip([0, 1], new Ship(3), "y");
-  console.log(gameBoard.ships);
 
   it("should place Ships at coords", () => {
     expect(gameBoard.ships[1].y).toBe(1);
   });
 
   it("should not place ships on used locations", () => {
-    expect(gameBoard.placeShip([0, 0], new Ship(2))).toBe(false);
+    expect(gameBoard.placeShip([3, 0], new Ship(2))).toBe(false);
   });
 
   it("should send hit to ship if in position", () => {
