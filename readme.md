@@ -1,4 +1,5 @@
 TODO
 
 # Add predetermined coordinates to driver function
-# Make renderGameboard render board with ships + hits/misses
+# Use a UI controller to keep track of everything UI
+# Add render gameBoard as a method in UI controller class

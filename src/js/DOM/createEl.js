@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-syntax */
 class El {
   element;
@@ -9,27 +11,27 @@ class El {
 
     for (const [option, value] of Object.entries(options)) {
       // Classes - string list with " " separator or array
-      if (option == "classes") {
+      if (option === "classes") {
         this.classes = value;
       }
 
       // Parent - css selector or reference to element
-      if (option == "parent") {
+      if (option === "parent") {
         this.parent = value;
       }
 
       // TextContent
-      if (option == "text") {
+      if (option === "text") {
         this.text = value;
       }
 
       // type
-      if (option == "properties") {
+      if (option === "properties") {
         this.properties = value;
       }
 
       // ID
-      if (option == "id") {
+      if (option === "id") {
         this.id = value;
       }
     }
@@ -37,7 +39,7 @@ class El {
 
   // Provide an array of classes or a string separated by spaces to set classes
   set classes(value) {
-    if (value != "") {
+    if (value !== "") {
       Array.isArray(value)
         ? (this.#currentClasses = value)
         : (this.#currentClasses = value.split(" "));

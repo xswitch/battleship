@@ -8,3 +8,15 @@ body {
   height: 100dvh;
   background-color: black;
 }
+
+#content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.gameBoard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}

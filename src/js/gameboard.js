@@ -3,6 +3,7 @@ class GameBoard {
     this.ships = [];
     this.hits = [];
     this.misses = [];
+    this.size = 10;
   }
 
   checkForShip(coordinates) {
@@ -34,7 +35,10 @@ class GameBoard {
 
   placeShip(coords, ship, direction = "x") {
     if (this.checkForShip(coords) !== false) return false;
-    if (coords[0] + ship.length > 10 || coords[1] + ship.length > 10)
+    if (
+      coords[0] + ship.length > this.size ||
+      coords[1] + ship.length > this.size
+    )
       return false;
     const max = { xMax: coords[0], yMax: coords[1] };
     max[`${direction}Max`] += ship.length;
