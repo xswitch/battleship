@@ -20,6 +20,8 @@ const driver = (() => {
   players[1].gameBoard.receiveAttack([5, 1]);
   players[0].gameBoard.receiveAttack([5, 1]);
   players[1].gameBoard.receiveAttack([5, 2]);
+  players[1].gameBoard.receiveAttack([5, 6]);
 
-  console.log(players);
+  ui.updateBoards();
+  ui.displayShips(players[0]);
 })();

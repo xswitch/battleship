@@ -6,12 +6,8 @@ class UI {
     this.boards = [];
   }
 
-  findCellFromCoordinates(coordinates) {
-    return coordinates[1] * 10 + coordinates[0];
-  }
-
-  renderPlayers() {
-    this.players.forEach((player) => this.renderBoard(player));
+  findCellFromCoordinates(coordinates, board) {
+    return this.boards[board][coordinates[1] * 10 + coordinates[0]];
   }
 
   createBoards() {
@@ -27,12 +23,28 @@ class UI {
         for (let j = 0; j < player.gameBoard.size; j += 1) {
           const gridCell = new El("div", {
             parent: board.element,
-            classes: `gridCell ${this.findCellFromCoordinates([j, i])}`,
+            classes: `gridCell ${i * 10 + j}`,
           });
           cells.push({ element: gridCell.element, coordinates: [j, i] });
         }
       }
       this.boards.push(cells);
+    });
+  }
+
+  displayShips(player) {
+    console.log(player);
+  }
+
+  updateBoards() {
+    this.boards.forEach((board, index) => {
+      const player = this.players[index];
+      player.gameBoard.hits.forEach((hit) => {
+        this.findCellFromCoordinates(hit, index).element.classList.add("hit");
+      });
+      player.gameBoard.misses.forEach((miss) => {
+        this.findCellFromCoordinates(miss, index).element.classList.add("miss");
+      });
     });
   }
 }
