@@ -13,6 +13,8 @@ body {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  padding: 25px;
 }
 
 .gameBoard {
@@ -20,6 +22,10 @@ body {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   gap: 5px;
+}
+
+.gridCell {
+  border: 1px solid white;
 }
 
 .hit {

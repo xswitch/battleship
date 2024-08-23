@@ -32,8 +32,32 @@ class UI {
     });
   }
 
-  displayShips(player) {
-    console.log(player);
+  showShips() {
+    this.players.forEach((player) => {
+      player.gameBoard.ships.forEach((ship) => {
+        const coordinates = this.createCoordinatesFromDifference(ship);
+      });
+    });
+  }
+
+  createCoordinatesFromDifference(ship) {
+    const coordinates = {
+      x: ship.x,
+      y: ship.y,
+      xMax: ship.xMax,
+      yMax: ship.yMax,
+    };
+    const array = [];
+    const direction = ship.x !== ship.xMax ? "x" : "y";
+    for (
+      let i = coordinates[direction];
+      i < coordinates[`${direction}Max`];
+      i += 1
+    ) {
+      if (direction === "x") array.push([i, ship.y]);
+      if (direction === "y") array.push([ship.x, i]);
+    }
+    return array;
   }
 
   updateBoards() {
