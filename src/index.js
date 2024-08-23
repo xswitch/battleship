@@ -23,5 +23,5 @@ const driver = (() => {
   players[1].gameBoard.receiveAttack([5, 6]);
 
   ui.updateBoards();
-  ui.showShips(players[0]);
+  ui.showShips(0);
 })();

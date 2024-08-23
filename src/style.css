@@ -28,10 +28,14 @@ body {
   border: 1px solid white;
 }
 
-.hit {
+div.hit {
   background-color: green;
 }
 
 .miss {
   background-color: red;
+}
+
+.ship {
+  background-color: gray;
 }

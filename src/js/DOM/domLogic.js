@@ -32,10 +32,14 @@ class UI {
     });
   }
 
-  showShips() {
-    this.players.forEach((player) => {
-      player.gameBoard.ships.forEach((ship) => {
-        const coordinates = this.createCoordinatesFromDifference(ship);
+  showShips(playerIndex) {
+    this.players[playerIndex].gameBoard.ships.forEach((ship) => {
+      const coordinates = this.createCoordinatesFromDifference(ship);
+      coordinates.forEach((coordinate) => {
+        this.findCellFromCoordinates(
+          coordinate,
+          playerIndex,
+        ).element.classList.add("ship");
       });
     });
   }
