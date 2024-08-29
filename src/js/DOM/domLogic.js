@@ -24,8 +24,11 @@ class UI {
   cellClick(e, coordinates, player) {
     if (player !== this.currentPlayer) return false;
     if (player.gameBoard.receiveAttack(coordinates)) {
+      if (player.gameBoard.allSunk()) console.log(`Win`);
       this.changePlayer();
       this.updateBoards();
+    } else {
+      console.log("Already Used");
     }
     return true;
   }

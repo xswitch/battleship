@@ -10,7 +10,6 @@ body {
 }
 
 #content {
-  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 25px;
@@ -22,6 +21,7 @@ body {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   gap: 5px;
+  aspect-ratio: 1;
 }
 
 .gridCell {
