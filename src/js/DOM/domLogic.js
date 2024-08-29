@@ -1,17 +1,19 @@
+/* eslint-disable prefer-destructuring */
 import El from "./createEl";
 
 class UI {
   constructor(players) {
     this.players = players;
     this.boards = [];
-    this.currentPlayer = 0;
+    [this.currentPlayer] = this.players;
+    console.log(this.currentPlayer);
   }
 
   changePlayer() {
-    if (this.currentPlayer === 0) {
-      this.currentPlayer = 1;
+    if (this.currentPlayer === this.players[0]) {
+      this.currentPlayer = this.players[1];
     } else {
-      this.currentPlayer = 0;
+      this.currentPlayer = this.players[0];
     }
   }
 
@@ -19,9 +21,13 @@ class UI {
     return this.boards[board][coordinates[1] * 10 + coordinates[0]];
   }
 
-  cellClick(e, coordinates) {
-    this.players[this.currentPlayer].gameBoard.receiveAttack(coordinates);
-    this.updateBoards();
+  cellClick(e, coordinates, player) {
+    if (player !== this.currentPlayer) return false;
+    if (player.gameBoard.receiveAttack(coordinates)) {
+      this.changePlayer();
+      this.updateBoards();
+    }
+    return true;
   }
 
   createBoards() {
@@ -39,7 +45,7 @@ class UI {
             classes: `gridCell ${i * 10 + j}`,
           });
           gridCell.element.addEventListener("click", (event) => {
-            this.cellClick(event, [j, i]);
+            this.cellClick(event, [j, i], player);
           });
           cells.push({ element: gridCell.element, coordinates: [j, i] });
         }
@@ -56,6 +62,18 @@ class UI {
           coordinate,
           playerIndex,
         ).element.classList.add("ship");
+      });
+    });
+  }
+
+  removeShips(playerIndex) {
+    this.players[playerIndex].gameBoard.ships.forEach((ship) => {
+      const coordinates = this.createCoordinatesFromDifference(ship);
+      coordinates.forEach((coordinate) => {
+        this.findCellFromCoordinates(
+          coordinate,
+          playerIndex,
+        ).element.classList.remove("ship");
       });
     });
   }

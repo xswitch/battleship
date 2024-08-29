@@ -17,8 +17,6 @@ class GameBoard {
       )
         shipInLocation = ship;
     });
-    console.log(shipInLocation);
-    console.log(coordinates);
     return shipInLocation;
   }
 

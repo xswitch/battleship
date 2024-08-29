@@ -14,14 +14,6 @@ const driver = (() => {
 
   ui.createBoards();
 
-  players[0].gameBoard.receiveAttack([0, 1]);
-  players[1].gameBoard.receiveAttack([1, 1]);
-  players[0].gameBoard.receiveAttack([1, 1]);
-  players[1].gameBoard.receiveAttack([5, 1]);
-  players[0].gameBoard.receiveAttack([5, 1]);
-  players[1].gameBoard.receiveAttack([5, 2]);
-  players[1].gameBoard.receiveAttack([5, 6]);
-
   ui.updateBoards();
   ui.showShips(0);
 })();
