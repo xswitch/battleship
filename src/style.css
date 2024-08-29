@@ -25,7 +25,13 @@ body {
 }
 
 .gridCell {
-  border: 1px solid white;
+  border: 1px solid grey;
+}
+
+.gridCell:hover {
+  transition: all 0.2s;
+  box-shadow: 0 0 7px 1px white;
+  cursor: pointer;
 }
 
 div.hit {

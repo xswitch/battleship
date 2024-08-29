@@ -17,6 +17,8 @@ class GameBoard {
       )
         shipInLocation = ship;
     });
+    console.log(shipInLocation);
+    console.log(coordinates);
     return shipInLocation;
   }
 
@@ -41,7 +43,7 @@ class GameBoard {
     )
       return false;
     const max = { xMax: coords[0], yMax: coords[1] };
-    max[`${direction}Max`] += ship.length;
+    max[`${direction}Max`] += ship.length - 1;
     this.ships.push({
       x: coords[0],
       y: coords[1],

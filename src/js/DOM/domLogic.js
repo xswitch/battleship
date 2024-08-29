@@ -4,10 +4,24 @@ class UI {
   constructor(players) {
     this.players = players;
     this.boards = [];
+    this.currentPlayer = 0;
+  }
+
+  changePlayer() {
+    if (this.currentPlayer === 0) {
+      this.currentPlayer = 1;
+    } else {
+      this.currentPlayer = 0;
+    }
   }
 
   findCellFromCoordinates(coordinates, board) {
     return this.boards[board][coordinates[1] * 10 + coordinates[0]];
+  }
+
+  cellClick(e, coordinates) {
+    this.players[this.currentPlayer].gameBoard.receiveAttack(coordinates);
+    this.updateBoards();
   }
 
   createBoards() {
@@ -16,7 +30,6 @@ class UI {
         parent: document.querySelector("#content"),
         classes: "gameBoard",
       });
-
       const cells = [];
 
       for (let i = 0; i < player.gameBoard.size; i += 1) {
@@ -24,6 +37,9 @@ class UI {
           const gridCell = new El("div", {
             parent: board.element,
             classes: `gridCell ${i * 10 + j}`,
+          });
+          gridCell.element.addEventListener("click", (event) => {
+            this.cellClick(event, [j, i]);
           });
           cells.push({ element: gridCell.element, coordinates: [j, i] });
         }
@@ -55,7 +71,7 @@ class UI {
     const direction = ship.x !== ship.xMax ? "x" : "y";
     for (
       let i = coordinates[direction];
-      i < coordinates[`${direction}Max`];
+      i <= coordinates[`${direction}Max`];
       i += 1
     ) {
       if (direction === "x") array.push([i, ship.y]);
