@@ -6,22 +6,31 @@ class UI {
     this.players = players;
     this.boards = [];
     [this.currentPlayer] = this.players;
-    console.log(this.currentPlayer);
+    this.boardElements = [];
   }
 
   changePlayer() {
     if (this.currentPlayer === this.players[0]) {
       this.currentPlayer = this.players[1];
+      this.boardElements[0].classList.remove("active");
+      this.boardElements[1].classList.add("active");
     } else {
       this.currentPlayer = this.players[0];
+      this.boardElements[1].classList.remove("active");
+      this.boardElements[0].classList.add("active");
     }
+    if (this.currentPlayer.ai === true)
+      this.cellClick(
+        this.currentPlayer.getValidCoordinates(),
+        this.currentPlayer,
+      );
   }
 
   findCellFromCoordinates(coordinates, board) {
     return this.boards[board][coordinates[1] * 10 + coordinates[0]];
   }
 
-  cellClick(e, coordinates, player) {
+  cellClick(coordinates, player) {
     if (player !== this.currentPlayer) return false;
     if (player.gameBoard.receiveAttack(coordinates)) {
       if (player.gameBoard.allSunk()) console.log(`Win`);
@@ -34,11 +43,14 @@ class UI {
   }
 
   createBoards() {
-    this.players.forEach((player) => {
+    this.boardElements = [];
+    this.players.forEach((player, index) => {
       const board = new El("div", {
         parent: document.querySelector("#content"),
         classes: "gameBoard",
       });
+      this.boardElements.push(board.element);
+      if (index === 0) board.element.classList.add("active");
       const cells = [];
 
       for (let i = 0; i < player.gameBoard.size; i += 1) {
@@ -47,8 +59,8 @@ class UI {
             parent: board.element,
             classes: `gridCell ${i * 10 + j}`,
           });
-          gridCell.element.addEventListener("click", (event) => {
-            this.cellClick(event, [j, i], player);
+          gridCell.element.addEventListener("click", () => {
+            this.cellClick([j, i], player);
           });
           cells.push({ element: gridCell.element, coordinates: [j, i] });
         }

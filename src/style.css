@@ -22,13 +22,18 @@ body {
   grid-template-rows: repeat(10, 1fr);
   gap: 5px;
   aspect-ratio: 1;
+  padding: 10px;
+}
+
+.active {
+  box-shadow: 0 0 10px 1px greenyellow;
 }
 
 .gridCell {
   border: 1px solid grey;
 }
 
-.gridCell:hover {
+.active>.gridCell:hover {
   transition: all 0.2s;
   box-shadow: 0 0 7px 1px white;
   cursor: pointer;

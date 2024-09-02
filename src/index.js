@@ -4,7 +4,7 @@ import Ship from "./js/ship";
 import "./style.css";
 
 const driver = (() => {
-  const players = [new Player(), new Player()];
+  const players = [new Player(), new Player(true)];
   const ui = new UI(players);
   players.forEach((player) => {
     player.gameBoard.placeShip([0, 1], new Ship(2));
