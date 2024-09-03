@@ -14,4 +14,5 @@ const driver = (() => {
 
   ui.updateBoards();
   ui.showShips(1);
+  ui.showShips(0);
 })();

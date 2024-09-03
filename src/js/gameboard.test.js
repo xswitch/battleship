@@ -46,6 +46,6 @@ describe("Gameboard class", () => {
   });
 
   it("should not place out of bounds", () => {
-    expect(gameBoard.placeShip([9, 0], new Ship(5))).toBe(false);
+    expect(gameBoard.placeShip([8, 8], new Ship(3))).toBe(false);
   });
 });
