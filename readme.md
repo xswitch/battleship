@@ -22,4 +22,4 @@ TODO
 > End Screen
 
 Bugs
-> Ships are too long
+> Placing ships over other ships. No checks
