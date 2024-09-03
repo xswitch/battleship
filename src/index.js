@@ -6,14 +6,12 @@ import "./style.css";
 const driver = (() => {
   const players = [new Player(), new Player(true)];
   const ui = new UI(players);
-  players.forEach((player) => {
-    player.gameBoard.placeShip([0, 1], new Ship(2));
-    player.gameBoard.placeShip([5, 3], new Ship(2));
-    player.gameBoard.placeShip([5, 1], new Ship(2), "y");
-  });
+  players[0].gameBoard.placeShip([2, 2], new Ship(5), "y");
+  players[1].gameBoard.placeShip([3, 1], new Ship(5), "y");
 
   ui.createBoards();
+  ui.createControls();
 
   ui.updateBoards();
-  ui.showShips(0);
+  ui.showShips(1);
 })();

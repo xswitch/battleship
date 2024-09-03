@@ -1,4 +1,5 @@
 /* eslint-disable prefer-destructuring */
+import Ship from "../ship";
 import El from "./createEl";
 
 class UI {
@@ -7,6 +8,29 @@ class UI {
     this.boards = [];
     [this.currentPlayer] = this.players;
     this.boardElements = [];
+    this.playing = false;
+  }
+
+  createControls() {
+    const controlContainer = document.querySelector(".controls");
+    this.currentPlayer.ships.forEach((ship) => {
+      const shipButton = new El("button", {
+        classes: "shipButton",
+        parent: controlContainer,
+        text: ship.name,
+      }).element;
+      const shipAmount = new El("h2", {
+        classes: "shipAmount",
+        parent: controlContainer,
+        text: ship.amount,
+      });
+
+      shipButton.addEventListener("click", () => {
+        this.currentPlayer.selectShip(ship.name);
+        console.log(ship.name, ship.amount);
+        console.log(this.currentPlayer.selectedShip);
+      });
+    });
   }
 
   changePlayer() {
@@ -30,7 +54,7 @@ class UI {
     return this.boards[board][coordinates[1] * 10 + coordinates[0]];
   }
 
-  cellClick(coordinates, player) {
+  attackCell(coordinates, player) {
     if (player !== this.currentPlayer) return false;
     if (player.gameBoard.receiveAttack(coordinates)) {
       if (player.gameBoard.allSunk()) console.log(`Win`);
@@ -40,6 +64,20 @@ class UI {
       console.log("Already Used");
     }
     return true;
+  }
+
+  placeCell(coordinates, player) {
+    player.gameBoard.placeShip(
+      coordinates,
+      new Ship(player.selectedShip.length),
+    );
+    this.showShips(this.players.indexOf(player));
+    console.log(`placing ${player.selectedShip.name} on [${coordinates}]`);
+  }
+
+  cellClick(coordinates, player) {
+    if (this.playing === true) this.attackCell(coordinates, player);
+    if (this.playing === false) this.placeCell(coordinates, player);
   }
 
   createBoards() {

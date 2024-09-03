@@ -17,9 +17,17 @@ describe("Player Class", () => {
   it("should produce random coordinates", () => {
     const player = new Player(true);
     const randomCoords = player.randomCoordinates();
-    console.log(randomCoords);
     expect(randomCoords.length).toBe(2);
     expect(randomCoords[0]).toBeLessThan(10);
     expect(randomCoords[1]).toBeLessThan(10);
+  });
+
+  it("should return ship info based on name", () => {
+    const player = new Player();
+    expect(player.getShip("cruiser")).toEqual({
+      name: "cruiser",
+      length: 5,
+      amount: 1,
+    });
   });
 });
