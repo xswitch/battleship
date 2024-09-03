@@ -110,7 +110,10 @@ class UI {
 
   showShips(playerIndex) {
     this.players[playerIndex].gameBoard.ships.forEach((ship) => {
-      const coordinates = this.createCoordinatesFromDifference(ship);
+      const coordinates =
+        this.players[playerIndex].gameBoard.createCoordinatesFromDifference(
+          ship,
+        );
       coordinates.forEach((coordinate) => {
         this.findCellFromCoordinates(
           coordinate,
@@ -122,7 +125,10 @@ class UI {
 
   removeShips(playerIndex) {
     this.players[playerIndex].gameBoard.ships.forEach((ship) => {
-      const coordinates = this.createCoordinatesFromDifference(ship);
+      const coordinates =
+        this.players[playerIndex].gameBoard.createCoordinatesFromDifference(
+          ship,
+        );
       coordinates.forEach((coordinate) => {
         this.findCellFromCoordinates(
           coordinate,

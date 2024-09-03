@@ -22,4 +22,6 @@ TODO
 > End Screen
 
 Bugs
-> Placing ships over other ships. No checks
+> When switching ships, ships can be placed as if they had previous length
+>> If x is lower and xMax is higher it happens. need check for those
+create coordinates from difference, then run checkforship on all coordinates

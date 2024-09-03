@@ -34,21 +34,46 @@ class GameBoard {
   }
 
   placeShip(coords, ship, direction = "x") {
-    console.log(this.ships);
-    if (this.checkForShip(coords) !== false) return false;
     const max = { xMax: coords[0], yMax: coords[1] };
     max[`${direction}Max`] += ship.length - 1;
-    if (this.checkForShip([max.xMax, max.yMax]) !== false) return false;
-    if (max.xMax >= this.size || max.yMax >= this.size) return false;
-    this.ships.push({
+    const newShip = {
       x: coords[0],
       y: coords[1],
       xMax: max.xMax,
       yMax: max.yMax,
       ship,
       direction,
+    };
+    let taken = false;
+    const newShipArray = this.createCoordinatesFromDifference(newShip);
+    newShipArray.forEach((entry) => {
+      if (this.checkForShip(entry) !== false) taken = true;
     });
+    if (taken === true) return false;
+    if (this.checkForShip([max.xMax, max.yMax]) !== false) return false;
+    if (max.xMax >= this.size || max.yMax >= this.size) return false;
+    this.ships.push(newShip);
     return true;
+  }
+
+  createCoordinatesFromDifference(ship) {
+    const coordinates = {
+      x: ship.x,
+      y: ship.y,
+      xMax: ship.xMax,
+      yMax: ship.yMax,
+    };
+    const array = [];
+    const direction = ship.x !== ship.xMax ? "x" : "y";
+    for (
+      let i = coordinates[direction];
+      i <= coordinates[`${direction}Max`];
+      i += 1
+    ) {
+      if (direction === "x") array.push([i, ship.y]);
+      if (direction === "y") array.push([ship.x, i]);
+    }
+    return array;
   }
 
   receiveAttack(coordinates) {
