@@ -22,4 +22,4 @@ TODO
 > End Screen
 
 Bugs
-> Ships can be placed through each other when not using command to place them
+> Ships are too long

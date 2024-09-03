@@ -143,7 +143,7 @@ class UI {
     const direction = ship.x !== ship.xMax ? "x" : "y";
     for (
       let i = coordinates[direction];
-      i <= coordinates[`${direction}Max`];
+      i < coordinates[`${direction}Max`];
       i += 1
     ) {
       if (direction === "x") array.push([i, ship.y]);
