@@ -67,6 +67,7 @@ class UI {
   }
 
   placeCell(coordinates, player) {
+    if (player.selectedShip.amount === 0) return;
     player.gameBoard.placeShip(
       coordinates,
       new Ship(player.selectedShip.length),

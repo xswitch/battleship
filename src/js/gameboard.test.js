@@ -12,7 +12,7 @@ describe("Gameboard class", () => {
   });
 
   it("should not place ships on used locations", () => {
-    expect(gameBoard.placeShip([3, 0], new Ship(2))).toBe(false);
+    expect(gameBoard.placeShip([2, 0], new Ship(2))).toBe(false);
   });
 
   it("should send hit to ship if in position", () => {

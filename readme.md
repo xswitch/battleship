@@ -20,3 +20,8 @@ TODO
 > Options
 > Icons
 > End Screen
+
+Bugs
+> Ships can be placed through each other when not using command to place them
+> Ships cant be place "length" away from bottom even if going in x direction
+> 
