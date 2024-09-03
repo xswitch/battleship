@@ -1,6 +1,11 @@
 TODO
 
 # Code the game loop
+> PRE GAME
+>> Player 1 places ships first
+>>> When all ships are placed change currentPlayer to player 2
+>>>> When all player2's ships are placed change currentPlayer to player1 and state to playing
+
 > Player 1 starts
 >> Click cell on player 2 board
 >>> Check if hit/miss/used
@@ -22,6 +27,11 @@ TODO
 > End Screen
 
 Bugs
-> When switching ships, ships can be placed as if they had previous length
->> If x is lower and xMax is higher it happens. need check for those
-create coordinates from difference, then run checkforship on all coordinates
+
+
+DOING NOW
+> Creating checks for amount of ships left
+> Changing ship to next in array if amount === 0
+> Start on first ship in array, remove buttons for selecting
+> Show amount left and preview placement
+> Start normal game loop when both players have placed ships

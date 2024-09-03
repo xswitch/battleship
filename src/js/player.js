@@ -9,12 +9,19 @@ class Player {
       { name: "battleship", length: 3, amount: 2 },
       { name: "cruiser", length: 5, amount: 1 },
     ];
-    [this.selectedShip] = this.ships;
   }
 
-  selectShip(name) {
-    const ship = this.getShip(name);
-    if (ship.amount > 0) this.selectedShip = ship;
+  useShip() {
+    this.ships[0].amount -= 1;
+    this.checkShip();
+  }
+
+  checkShip() {
+    if (this.ships.length === 0) return false;
+    if (this.ships[0].amount === 0) {
+      this.ships.shift();
+    }
+    return true;
   }
 
   getShip(name) {

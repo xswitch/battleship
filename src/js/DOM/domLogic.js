@@ -14,21 +14,10 @@ class UI {
   createControls() {
     const controlContainer = document.querySelector(".controls");
     this.currentPlayer.ships.forEach((ship) => {
-      const shipButton = new El("button", {
-        classes: "shipButton",
-        parent: controlContainer,
-        text: ship.name,
-      }).element;
       const shipAmount = new El("h2", {
         classes: "shipAmount",
         parent: controlContainer,
         text: ship.amount,
-      });
-
-      shipButton.addEventListener("click", () => {
-        this.currentPlayer.selectShip(ship.name);
-        console.log(ship.name, ship.amount);
-        console.log(this.currentPlayer.selectedShip);
       });
     });
   }
@@ -55,7 +44,6 @@ class UI {
   }
 
   attackCell(coordinates, player) {
-    if (player !== this.currentPlayer) return false;
     if (player.gameBoard.receiveAttack(coordinates)) {
       if (player.gameBoard.allSunk()) console.log(`Win`);
       this.changePlayer();
@@ -67,16 +55,17 @@ class UI {
   }
 
   placeCell(coordinates, player) {
-    if (player.selectedShip.amount === 0) return;
-    player.gameBoard.placeShip(
-      coordinates,
-      new Ship(player.selectedShip.length),
-    );
+    if (player.ships.length === 0) return;
+    if (
+      player.gameBoard.placeShip(coordinates, new Ship(player.ships[0].length))
+    )
+      player.useShip();
+
     this.showShips(this.players.indexOf(player));
-    console.log(`placing ${player.selectedShip.name} on [${coordinates}]`);
   }
 
   cellClick(coordinates, player) {
+    if (player !== this.currentPlayer) return;
     if (this.playing === true) this.attackCell(coordinates, player);
     if (this.playing === false) this.placeCell(coordinates, player);
   }
@@ -85,7 +74,7 @@ class UI {
     this.boardElements = [];
     this.players.forEach((player, index) => {
       const board = new El("div", {
-        parent: document.querySelector("#content"),
+        parent: document.querySelector(`.boardContainer${index + 1}`),
         classes: "gameBoard",
       });
       this.boardElements.push(board.element);

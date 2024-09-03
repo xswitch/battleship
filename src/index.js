@@ -1,6 +1,5 @@
 import UI from "./js/DOM/domLogic";
 import Player from "./js/player";
-import Ship from "./js/ship";
 import "./style.css";
 
 const driver = (() => {

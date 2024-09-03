@@ -7,13 +7,19 @@
 body {
   height: 100dvh;
   background-color: black;
+  display: grid;
 }
 
 #content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr 2fr;
   gap: 25px;
   padding: 25px;
+  align-items: center;
+}
+
+.boardContainer1,
+.boardContainer2 {
 }
 
 .gameBoard {
