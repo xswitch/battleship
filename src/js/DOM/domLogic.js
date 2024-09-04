@@ -9,16 +9,55 @@ class UI {
     [this.currentPlayer] = this.players;
     this.boardElements = [];
     this.playing = false;
+    this.controlElements = [];
+  }
+
+  updateControls() {
+    this.controlElements.forEach((entry, index) => {
+      if (this.currentPlayer.ships[index] !== undefined) {
+        entry.name.textContent = this.currentPlayer.ships[index].name;
+        entry.amount.textContent = this.currentPlayer.ships[index].amount;
+      } else {
+        entry.name.remove();
+        entry.amount.remove();
+      }
+    });
   }
 
   createControls() {
-    const controlContainer = document.querySelector(".controls");
-    this.currentPlayer.ships.forEach((ship) => {
-      const shipAmount = new El("h2", {
-        classes: "shipAmount",
-        parent: controlContainer,
-        text: ship.amount,
-      });
+    const controlColumn = document.querySelector(".controls");
+    const controlContainer = new El("div", {
+      classes: "shipTable",
+      parent: controlColumn,
+    }).element;
+    const controlNameTitle = new El("h2", {
+      classes: "shipTableTitle ti",
+      text: "Name",
+      parent: controlContainer,
+    });
+    const controlNameAmount = new El("h2", {
+      classes: "shipTableTitle ti",
+      text: "#",
+      parent: controlContainer,
+    });
+    this.currentPlayer.ships.forEach((ship, index) => {
+      const elements = {
+        name: new El("h2", {
+          classes: "shipName ti",
+          parent: controlContainer,
+          text: ship.name,
+        }).element,
+        amount: new El("h2", {
+          classes: "shipAmount ti",
+          parent: controlContainer,
+          text: ship.amount,
+        }).element,
+      };
+      if (index === 0) {
+        elements.name.classList.add("shipTableCurrent");
+        elements.amount.classList.add("shipTableCurrent");
+      }
+      this.controlElements.push(elements);
     });
   }
 
@@ -62,6 +101,7 @@ class UI {
       player.useShip();
 
     this.showShips(this.players.indexOf(player));
+    this.updateControls();
   }
 
   cellClick(coordinates, player) {

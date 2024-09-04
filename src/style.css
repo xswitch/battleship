@@ -12,14 +12,34 @@ body {
 
 #content {
   display: grid;
-  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-columns: 2fr max-content 2fr;
   gap: 25px;
   padding: 25px;
   align-items: center;
 }
 
-.boardContainer1,
-.boardContainer2 {
+.shipTable {
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+  justify-items: center;
+}
+
+.shipTableTitle {
+  font-weight: 900;
+}
+
+.shipTableCurrent.ti {
+  background-color: rgb(60, 60, 60);
+  color: white;
+}
+
+.ti {
+  color: white;
+  border: 1px solid white;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  font-weight: 100;
 }
 
 .gameBoard {

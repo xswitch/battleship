@@ -5,9 +5,11 @@ class Player {
     this.gameBoard = new GameBoard();
     this.ai = ai;
     this.ships = [
-      { name: "fishing boat", length: 1, amount: 3 },
-      { name: "battleship", length: 3, amount: 2 },
-      { name: "cruiser", length: 5, amount: 1 },
+      { name: "Destroyer", length: 2, amount: 2 },
+      { name: "Submarine", length: 3, amount: 2 },
+      { name: "Cruiser", length: 3, amount: 1 },
+      { name: "Battleship", length: 4, amount: 1 },
+      { name: "Carrier", length: 5, amount: 1 },
     ];
   }
 

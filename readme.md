@@ -30,8 +30,7 @@ Bugs
 
 
 DOING NOW
-> Creating checks for amount of ships left
-> Changing ship to next in array if amount === 0
-> Start on first ship in array, remove buttons for selecting
 > Show amount left and preview placement
+>> Polish table
+>> on enter, create coordinates from difference and light up cells with coordinates from array
 > Start normal game loop when both players have placed ships
