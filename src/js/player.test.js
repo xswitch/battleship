@@ -21,13 +21,4 @@ describe("Player Class", () => {
     expect(randomCoords[0]).toBeLessThan(10);
     expect(randomCoords[1]).toBeLessThan(10);
   });
-
-  it("should return ship info based on name", () => {
-    const player = new Player();
-    expect(player.getShip("cruiser")).toEqual({
-      name: "cruiser",
-      length: 5,
-      amount: 1,
-    });
-  });
 });

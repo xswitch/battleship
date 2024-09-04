@@ -15,8 +15,10 @@ class UI {
   updateControls() {
     this.controlElements.forEach((entry, index) => {
       if (this.currentPlayer.ships[index] !== undefined) {
-        entry.name.textContent = this.currentPlayer.ships[index].name;
-        entry.amount.textContent = this.currentPlayer.ships[index].amount;
+        const currentEntry = this.controlElements[index];
+        currentEntry.name.textContent = this.currentPlayer.ships[index].name;
+        currentEntry.amount.textContent =
+          this.currentPlayer.ships[index].amount;
       } else {
         entry.name.remove();
         entry.amount.remove();
@@ -102,6 +104,17 @@ class UI {
 
     this.showShips(this.players.indexOf(player));
     this.updateControls();
+    if (
+      this.players[0].ships.length === 0 &&
+      this.players[1].ships.length === 0
+    )
+      this.playing = true;
+    if (this.currentPlayer.ships.length === 0) this.changePlayer();
+    if (this.currentPlayer.ai === true)
+      this.cellClick(
+        this.currentPlayer.getValidCoordinates(),
+        this.currentPlayer,
+      );
   }
 
   cellClick(coordinates, player) {
@@ -165,26 +178,6 @@ class UI {
         ).element.classList.remove("ship");
       });
     });
-  }
-
-  createCoordinatesFromDifference(ship) {
-    const coordinates = {
-      x: ship.x,
-      y: ship.y,
-      xMax: ship.xMax,
-      yMax: ship.yMax,
-    };
-    const array = [];
-    const direction = ship.x !== ship.xMax ? "x" : "y";
-    for (
-      let i = coordinates[direction];
-      i <= coordinates[`${direction}Max`];
-      i += 1
-    ) {
-      if (direction === "x") array.push([i, ship.y]);
-      if (direction === "y") array.push([ship.x, i]);
-    }
-    return array;
   }
 
   updateBoards() {

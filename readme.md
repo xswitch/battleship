@@ -1,16 +1,8 @@
 TODO
 
 # Code the game loop
-> PRE GAME
->> Player 1 places ships first
->>> When all ships are placed change currentPlayer to player 2
->>>> When all player2's ships are placed change currentPlayer to player1 and state to playing
-
-> Player 1 starts
->> Click cell on player 2 board
->>> Check if hit/miss/used
->>>> if used, display error and go again else record result and send hit()
->>>>> Check if all ships are sunken if not, change player and start from step 1
+> Fix bug where ai is causing hits and misses when placing ships
+>> Reverse playing boards, currently player1 is shooting on his own ships and vice versa
 # Simple AI
 > Done
 >> Shoot close to same coordinates if it was a hit
@@ -33,4 +25,3 @@ DOING NOW
 > Show amount left and preview placement
 >> Polish table
 >> on enter, create coordinates from difference and light up cells with coordinates from array
-> Start normal game loop when both players have placed ships
