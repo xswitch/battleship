@@ -143,6 +143,19 @@ class UI {
           gridCell.element.addEventListener("click", () => {
             this.cellClick([j, i], player);
           });
+          gridCell.element.addEventListener("mouseenter", () => {
+            if (player === this.currentPlayer) {
+              const coordinates =
+                player.gameBoard.createCoordinatesFromDifference(
+                  player.gameBoard.createShipMeasurements(
+                    [j, i],
+                    player.ships[0].length,
+                    "x",
+                  ),
+                );
+              console.log(coordinates);
+            }
+          });
           cells.push({ element: gridCell.element, coordinates: [j, i] });
         }
       }

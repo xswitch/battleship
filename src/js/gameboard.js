@@ -33,25 +33,34 @@ class GameBoard {
     return false;
   }
 
-  placeShip(coords, ship, direction = "x") {
+  createShipMeasurements(coords, length, direction) {
     const max = { xMax: coords[0], yMax: coords[1] };
-    max[`${direction}Max`] += ship.length - 1;
+    max[`${direction}Max`] += length - 1;
     const newShip = {
       x: coords[0],
       y: coords[1],
       xMax: max.xMax,
       yMax: max.yMax,
-      ship,
       direction,
     };
+    return newShip;
+  }
+
+  outOfBounds(x, y) {
+    if (x >= this.size || y >= this.size) return true;
+    return false;
+  }
+
+  placeShip(coords, ship, direction = "x") {
+    const newShip = this.createShipMeasurements(coords, ship.length, direction);
+    const newShipArray = this.createCoordinatesFromDifference(newShip); // Use coords to light up cells
+    newShip.ship = ship;
     let taken = false;
-    const newShipArray = this.createCoordinatesFromDifference(newShip);
     newShipArray.forEach((entry) => {
       if (this.checkForShip(entry) !== false) taken = true;
     });
-    if (taken === true) return false;
-    if (this.checkForShip([max.xMax, max.yMax]) !== false) return false;
-    if (max.xMax >= this.size || max.yMax >= this.size) return false;
+    if (taken === true || this.outOfBounds(newShip.xMax, newShip.yMax))
+      return false;
     this.ships.push(newShip);
     return true;
   }
