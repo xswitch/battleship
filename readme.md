@@ -22,9 +22,7 @@ DOING NOW
 >> Polish table
 > Getting coordinates when entering cell
 
->> Check for out of bounds
->> Find cells from coordinates and change class
->> Store currently lit up cells for removing class when leaving, Clear array after all classes have been removed
 >> Check if position is a valid placement
+>> IF out of bounds, filter array and change only the ones within board to "invalid" class
 
 > Split up functions, isolating functionality

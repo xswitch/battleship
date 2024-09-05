@@ -10,6 +10,7 @@ class UI {
     this.boardElements = [];
     this.playing = false;
     this.controlElements = [];
+    this.hoveringCells = [];
   }
 
   updateControls() {
@@ -123,6 +124,56 @@ class UI {
     if (this.playing === false) this.placeCell(coordinates, player);
   }
 
+  cellEnter(player, coordinates) {
+    if (player === this.currentPlayer && this.playing === false) {
+      const coordinateArray = player.gameBoard.createCoordinatesFromDifference(
+        player.gameBoard.createShipMeasurements(
+          coordinates,
+          player.ships[0].length,
+          "x",
+        ),
+      ); // Creates an array of all the ships positions
+      if (
+        coordinateArray.some((coordinate) =>
+          player.gameBoard.outOfBounds(coordinate[0], coordinate[1]),
+        )
+      )
+        return;
+      // Checks wether any of them are out of bounds
+      coordinateArray.forEach((coordinate) => {
+        this.hoveringCells.push(
+          this.findCellFromCoordinates(coordinate, this.players.indexOf(player))
+            .element,
+        );
+      }); // Gets all the elements based on coordinates
+      this.hoveringCells.forEach((cell) => cell.classList.add("active"));
+    }
+  }
+
+  cellLeave() {
+    this.hoveringCells.forEach((cell) => {
+      cell.classList.remove("active");
+    });
+    this.hoveringCells = [];
+  }
+
+  cellInit(coordinates, player, board) {
+    const gridCell = new El("div", {
+      parent: board.element,
+      classes: `gridCell ${coordinates[1] * 10 + coordinates[0]}`,
+    });
+    gridCell.element.addEventListener("click", () => {
+      this.cellClick(coordinates, player);
+    });
+    gridCell.element.addEventListener("mouseenter", () => {
+      this.cellEnter(player, coordinates);
+    });
+    gridCell.element.addEventListener("mouseleave", () => {
+      this.cellLeave();
+    });
+    return gridCell.element;
+  }
+
   createBoards() {
     this.boardElements = [];
     this.players.forEach((player, index) => {
@@ -130,33 +181,14 @@ class UI {
         parent: document.querySelector(`.boardContainer${index + 1}`),
         classes: "gameBoard",
       });
-      this.boardElements.push(board.element);
       if (index === 0) board.element.classList.add("active");
+      this.boardElements.push(board.element);
       const cells = [];
 
       for (let i = 0; i < player.gameBoard.size; i += 1) {
         for (let j = 0; j < player.gameBoard.size; j += 1) {
-          const gridCell = new El("div", {
-            parent: board.element,
-            classes: `gridCell ${i * 10 + j}`,
-          });
-          gridCell.element.addEventListener("click", () => {
-            this.cellClick([j, i], player);
-          });
-          gridCell.element.addEventListener("mouseenter", () => {
-            if (player === this.currentPlayer) {
-              const coordinates =
-                player.gameBoard.createCoordinatesFromDifference(
-                  player.gameBoard.createShipMeasurements(
-                    [j, i],
-                    player.ships[0].length,
-                    "x",
-                  ),
-                );
-              console.log(coordinates);
-            }
-          });
-          cells.push({ element: gridCell.element, coordinates: [j, i] });
+          const gridCell = this.cellInit([j, i], player, board);
+          cells.push({ element: gridCell, coordinates: [j, i] });
         }
       }
       this.boards.push(cells);
