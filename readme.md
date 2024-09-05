@@ -22,7 +22,6 @@ DOING NOW
 >> Polish table
 > Getting coordinates when entering cell
 
->> Check if position is a valid placement
 >> IF out of bounds, filter array and change only the ones within board to "invalid" class
 
 > Split up functions, isolating functionality

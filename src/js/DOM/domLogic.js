@@ -116,6 +116,7 @@ class UI {
         this.currentPlayer.getValidCoordinates(),
         this.currentPlayer,
       );
+    this.cellLeave();
   }
 
   cellClick(coordinates, player) {

@@ -70,7 +70,6 @@ body {
 
 .active>.gridCell:hover {
   transition: all 0.2s;
-  box-shadow: 0 0 7px 1px white;
   cursor: pointer;
 }
 
