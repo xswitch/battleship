@@ -142,17 +142,26 @@ class UI {
       // Checks wether any of them are out of bounds
       coordinateArray.forEach((coordinate) => {
         this.hoveringCells.push(
-          this.findCellFromCoordinates(coordinate, this.players.indexOf(player))
-            .element,
+          this.findCellFromCoordinates(
+            coordinate,
+            this.players.indexOf(player),
+          ),
         );
       }); // Gets all the elements based on coordinates
-      this.hoveringCells.forEach((cell) => cell.classList.add("active"));
+      this.hoveringCells.forEach((cell) => {
+        if (player.gameBoard.checkForShip(cell.coordinates)) {
+          cell.element.classList.add("invalid");
+        } else {
+          cell.element.classList.add("valid");
+        }
+      });
     }
   }
 
   cellLeave() {
     this.hoveringCells.forEach((cell) => {
-      cell.classList.remove("active");
+      cell.element.classList.remove("valid");
+      cell.element.classList.remove("invalid");
     });
     this.hoveringCells = [];
   }
