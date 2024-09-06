@@ -15,6 +15,11 @@ class UI {
       if (this.playing === true) return;
       const key = event.key;
       if (key === "r") this.currentPlayer.changeRotation();
+      if (this.hoveringCells.length !== 0) {
+        const currentCell = this.hoveringCells[0].coordinates;
+        this.cellLeave();
+        this.cellEnter(this.currentPlayer, currentCell);
+      }
     });
   }
 

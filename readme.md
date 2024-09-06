@@ -23,6 +23,7 @@ For tomorrow
 
 > IF out of bounds, filter array and change only the ones within board to "invalid" class
 
-> Ship rotation
+> Ship rotation - DONE
+>> Update preview when rotating
 
 > Split up functions, isolating functionality
