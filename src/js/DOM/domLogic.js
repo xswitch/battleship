@@ -11,6 +11,11 @@ class UI {
     this.playing = false;
     this.controlElements = [];
     this.hoveringCells = [];
+    document.addEventListener("keydown", (event) => {
+      if (this.playing === true) return;
+      const key = event.key;
+      if (key === "r") this.currentPlayer.changeRotation();
+    });
   }
 
   updateControls() {
@@ -99,7 +104,11 @@ class UI {
   placeCell(coordinates, player) {
     if (player.ships.length === 0) return;
     if (
-      player.gameBoard.placeShip(coordinates, new Ship(player.ships[0].length))
+      player.gameBoard.placeShip(
+        coordinates,
+        new Ship(player.ships[0].length),
+        player.direction,
+      )
     )
       player.useShip();
 
@@ -131,7 +140,7 @@ class UI {
         player.gameBoard.createShipMeasurements(
           coordinates,
           player.ships[0].length,
-          "x",
+          player.direction,
         ),
       ); // Creates an array of all the ships positions
       if (

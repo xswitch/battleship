@@ -13,15 +13,16 @@ TODO
 > Options
 > Icons
 > End Screen
+> Toasts - Notifications for errors, hits, misses and whatever
 
 Bugs
 > Reverse playing boards, currently player1 is shooting on his own ships and vice versa
 
-DOING NOW
-> Show amount left and preview placement
->> Polish table
-> Getting coordinates when entering cell
+For tomorrow
+> Polish table
 
->> IF out of bounds, filter array and change only the ones within board to "invalid" class
+> IF out of bounds, filter array and change only the ones within board to "invalid" class
+
+> Ship rotation
 
 > Split up functions, isolating functionality

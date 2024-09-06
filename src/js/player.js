@@ -11,6 +11,11 @@ class Player {
       { name: "Battleship", length: 4, amount: 1 },
       { name: "Carrier", length: 5, amount: 1 },
     ];
+    this.direction = "x";
+  }
+
+  changeRotation() {
+    this.direction = this.direction === "x" ? "y" : "x";
   }
 
   useShip() {
