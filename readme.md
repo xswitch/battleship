@@ -4,10 +4,9 @@ TODO
 > 
 # Simple AI
 > Shoot close to same coordinates if it was a hit
+> Rotate ships
 # Placing of ships
->>> preview of placement
->>>> Ability to rotate ship
->>>>> Drag&Drop and sprites
+> Drag&Drop and sprites
 # Polish site
 > Start screen
 > Options
@@ -23,7 +22,10 @@ For tomorrow
 
 > IF out of bounds, filter array and change only the ones within board to "invalid" class
 
-> Ship rotation - DONE
->> Update preview when rotating
-
 > Split up functions, isolating functionality
+>> placeShip - check if ship is already there
+
+Fixed 
+- Preview stays if no ship is placed
+- refactored placeShip() a bit
+- 

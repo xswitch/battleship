@@ -55,11 +55,10 @@ class GameBoard {
     const newShip = this.createShipMeasurements(coords, ship.length, direction);
     const newShipArray = this.createCoordinatesFromDifference(newShip); // Use coords to light up cells
     newShip.ship = ship;
-    let taken = false;
-    newShipArray.forEach((entry) => {
-      if (this.checkForShip(entry) !== false) taken = true;
-    });
-    if (taken === true || this.outOfBounds(newShip.xMax, newShip.yMax))
+    if (
+      newShipArray.some((entry) => this.checkForShip(entry)) === true ||
+      this.outOfBounds(newShip.xMax, newShip.yMax)
+    )
       return false;
     this.ships.push(newShip);
     return true;
