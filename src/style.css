@@ -46,7 +46,6 @@ body {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
-  gap: 5px;
   aspect-ratio: 1;
   padding: 10px;
 }
@@ -56,17 +55,22 @@ body {
 }
 
 .active,
-.valid {
-  box-shadow: 0 0 10px 1px greenyellow;
+.gridCell.valid {
+  box-shadow: 0 0 10px 2px greenyellow;
+  border: 1px solid greenyellow;
+  z-index: 3;
 }
 
-.invalid {
-  box-shadow: 0 0 10px 1px orangered;
+
+.gridCell.invalid {
+  box-shadow: 0 0 10px 2px red;
+  border: 1px solid red;
+  z-index: 3;
 }
 
 .gridCell {
   border: 1px solid grey;
-}
+}inherit
 
 .active>.gridCell:hover {
   transition: all 0.2s;

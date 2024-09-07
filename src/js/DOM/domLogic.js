@@ -75,6 +75,7 @@ class UI {
   }
 
   changePlayer() {
+    const oldPlayer = this.currentPlayer;
     if (this.currentPlayer === this.players[0]) {
       this.currentPlayer = this.players[1];
       this.boardElements[0].classList.remove("active");
@@ -85,10 +86,7 @@ class UI {
       this.boardElements[0].classList.add("active");
     }
     if (this.currentPlayer.ai === true)
-      this.cellClick(
-        this.currentPlayer.getValidCoordinates(),
-        this.currentPlayer,
-      );
+      this.cellClick(oldPlayer.getValidCoordinates(), oldPlayer);
   }
 
   findCellFromCoordinates(coordinates, board) {
@@ -134,8 +132,13 @@ class UI {
       );
   }
 
+  findHumanPlayer() {
+    return this.players.filter((player) => player.ai === false);
+  }
+
   cellClick(coordinates, player) {
-    if (player !== this.currentPlayer) return;
+    if (player !== this.currentPlayer && this.playing === false) return;
+    if (player === this.currentPlayer && this.playing === true) return;
     if (this.playing === true) this.attackCell(coordinates, player);
     if (this.playing === false) this.placeCell(coordinates, player);
   }
