@@ -146,7 +146,7 @@ class UI {
   cellEnter(player, coordinates) {
     // Creates an array of all the ships positions
     if (player === this.currentPlayer && this.playing === false) {
-      const coordinateArray = player.gameBoard.createCoordinatesFromDifference(
+      let coordinateArray = player.gameBoard.createCoordinatesFromDifference(
         player.gameBoard.createShipMeasurements(
           coordinates,
           player.ships[0].length,
@@ -154,12 +154,19 @@ class UI {
         ),
       );
       // Checks wether any of them are out of bounds
+      let tooBig = false;
       if (
         coordinateArray.some((coordinate) =>
           player.gameBoard.outOfBounds(coordinate[0], coordinate[1]),
         )
-      )
-        return;
+      ) {
+        coordinateArray = coordinateArray.filter(
+          (coordinate) =>
+            player.gameBoard.outOfBounds(coordinate[0], coordinate[1]) ===
+            false,
+        );
+        tooBig = true;
+      }
       // Gets all the elements based on coordinates
       coordinateArray.forEach((coordinate) => {
         this.hoveringCells.push(
@@ -170,7 +177,7 @@ class UI {
         );
       });
       this.hoveringCells.forEach((cell) => {
-        if (player.gameBoard.checkForShip(cell.coordinates)) {
+        if (player.gameBoard.checkForShip(cell.coordinates) || tooBig) {
           cell.element.classList.add("invalid");
         } else {
           cell.element.classList.add("valid");

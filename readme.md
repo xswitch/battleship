@@ -22,8 +22,6 @@ For tomorrow
 >> fixed width, so boards stay the same size
 >> clearer display of currently selected ship
 
-> IF out of bounds, filter array and change only the ones within board to "invalid" class
-
 > Split up functions, isolating functionality
 >> placeShip - check if ship is already there
 
