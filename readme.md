@@ -1,7 +1,5 @@
 TODO
 
-# Code the game loop
-> 
 # Simple AI
 > Shoot close to same coordinates if it was a hit
 > Rotate ships
@@ -19,11 +17,13 @@ Bugs
 
 For tomorrow
 > Polish table
->> fixed width, so boards stay the same size
->> clearer display of currently selected ship
+>> remove table when game starts
+>> Container for each row
+>> 
 
 > Split up functions, isolating functionality
 >> placeShip - check if ship is already there
+>> Clean up gameboard class. Move stuff over to player class
 
 > Get images for ships
 >> Split up image into as many parts as ships length

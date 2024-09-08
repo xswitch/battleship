@@ -12,7 +12,7 @@ body {
 
 #content {
   display: grid;
-  grid-template-columns: 2fr max-content 2fr;
+  grid-template-columns: 2fr 15% 2fr;
   gap: 25px;
   padding: 25px;
   align-items: center;
@@ -22,6 +22,8 @@ body {
   display: grid;
   grid-template-columns: 1fr 2rem;
   justify-items: center;
+  border-radius: 10px;
+  background-color: rgb(50, 50, 50);
 }
 
 .shipTableTitle {
@@ -29,13 +31,12 @@ body {
 }
 
 .shipTableCurrent.ti {
-  background-color: rgb(60, 60, 60);
-  color: white;
+  box-shadow: 0 0 10px 2px greenyellow;
+  z-index: 2;
 }
 
 .ti {
   color: white;
-  border: 1px solid white;
   width: 100%;
   text-align: center;
   padding: 5px;
@@ -51,10 +52,12 @@ body {
 }
 
 .controls {
-  color: wheat;
 }
 
-.active,
+.active {
+  border: 1px solid greenyellow;
+}
+
 .gridCell.valid {
   box-shadow: 0 0 10px 2px greenyellow;
   border: 1px solid greenyellow;

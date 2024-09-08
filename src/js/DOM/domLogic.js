@@ -76,6 +76,7 @@ class UI {
 
   changePlayer() {
     const oldPlayer = this.currentPlayer;
+    this.removeShips();
     if (this.currentPlayer === this.players[0]) {
       this.currentPlayer = this.players[1];
       this.boardElements[0].classList.remove("active");
@@ -87,6 +88,8 @@ class UI {
     }
     if (this.currentPlayer.ai === true)
       this.cellClick(oldPlayer.getValidCoordinates(), oldPlayer);
+
+    this.showShips();
   }
 
   findCellFromCoordinates(coordinates, board) {
@@ -232,31 +235,29 @@ class UI {
     });
   }
 
-  showShips(playerIndex) {
-    this.players[playerIndex].gameBoard.ships.forEach((ship) => {
+  showShips() {
+    // Shows current players ships
+    this.currentPlayer.gameBoard.ships.forEach((ship) => {
       const coordinates =
-        this.players[playerIndex].gameBoard.createCoordinatesFromDifference(
-          ship,
-        );
+        this.currentPlayer.gameBoard.createCoordinatesFromDifference(ship);
       coordinates.forEach((coordinate) => {
         this.findCellFromCoordinates(
           coordinate,
-          playerIndex,
+          this.players.indexOf(this.currentPlayer),
         ).element.classList.add("ship");
       });
     });
   }
 
-  removeShips(playerIndex) {
-    this.players[playerIndex].gameBoard.ships.forEach((ship) => {
+  removeShips() {
+    // Removes current players ships
+    this.currentPlayer.gameBoard.ships.forEach((ship) => {
       const coordinates =
-        this.players[playerIndex].gameBoard.createCoordinatesFromDifference(
-          ship,
-        );
+        this.currentPlayer.gameBoard.createCoordinatesFromDifference(ship);
       coordinates.forEach((coordinate) => {
         this.findCellFromCoordinates(
           coordinate,
-          playerIndex,
+          this.players.indexOf(this.currentPlayer),
         ).element.classList.remove("ship");
       });
     });
