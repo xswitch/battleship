@@ -43,32 +43,26 @@ class UI {
       classes: "shipTable",
       parent: controlColumn,
     }).element;
-    const controlNameTitle = new El("h2", {
-      classes: "shipTableTitle ti",
-      text: "Name",
-      parent: controlContainer,
-    });
-    const controlNameAmount = new El("h2", {
-      classes: "shipTableTitle ti",
-      text: "#",
-      parent: controlContainer,
-    });
     this.currentPlayer.ships.forEach((ship, index) => {
+      const itemContainer = new El("div", {
+        classes: "tiContainer",
+        parent: controlContainer,
+      }).element;
       const elements = {
         name: new El("h2", {
           classes: "shipName ti",
-          parent: controlContainer,
+          parent: itemContainer,
           text: ship.name,
         }).element,
         amount: new El("h2", {
           classes: "shipAmount ti",
-          parent: controlContainer,
+          parent: itemContainer,
           text: ship.amount,
         }).element,
       };
+      elements.container = itemContainer;
       if (index === 0) {
-        elements.name.classList.add("shipTableCurrent");
-        elements.amount.classList.add("shipTableCurrent");
+        elements.container.classList.add("shipTableCurrent");
       }
       this.controlElements.push(elements);
     });
