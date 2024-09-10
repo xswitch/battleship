@@ -12,15 +12,19 @@ class UI {
     this.controlElements = [];
     this.hoveringCells = [];
     document.addEventListener("keydown", (event) => {
-      if (this.playing === true) return;
-      const key = event.key;
-      if (key === "r") this.currentPlayer.changeRotation();
-      if (this.hoveringCells.length !== 0) {
-        const currentCell = this.hoveringCells[0].coordinates;
-        this.cellLeave();
-        this.cellEnter(this.currentPlayer, currentCell);
-      }
+      this.rotateShip(event);
     });
+  }
+
+  rotateShip(event) {
+    if (this.playing === true) return;
+    const key = event.key;
+    if (key === "r") this.currentPlayer.changeRotation();
+    if (this.hoveringCells.length !== 0) {
+      const currentCell = this.hoveringCells[0].coordinates;
+      this.cellLeave();
+      this.cellEnter(this.currentPlayer, currentCell);
+    }
   }
 
   updateControls() {
@@ -68,17 +72,24 @@ class UI {
     });
   }
 
+  removeControls() {
+    this.controlElements.forEach((control) => {
+      const element = control.container;
+      element.remove();
+    });
+  }
+
   changePlayer() {
     const oldPlayer = this.currentPlayer;
     this.removeShips();
     if (this.currentPlayer === this.players[0]) {
       this.currentPlayer = this.players[1];
-      this.boardElements[0].classList.remove("active");
-      this.boardElements[1].classList.add("active");
-    } else {
-      this.currentPlayer = this.players[0];
       this.boardElements[1].classList.remove("active");
       this.boardElements[0].classList.add("active");
+    } else {
+      this.currentPlayer = this.players[0];
+      this.boardElements[0].classList.remove("active");
+      this.boardElements[1].classList.add("active");
     }
     if (this.currentPlayer.ai === true)
       this.cellClick(oldPlayer.getValidCoordinates(), oldPlayer);
@@ -95,6 +106,7 @@ class UI {
       if (player.gameBoard.allSunk()) console.log(`Win`);
       this.changePlayer();
       this.updateBoards();
+      this.cellLeave();
     } else {
       console.log("Already Used");
     }
@@ -120,13 +132,18 @@ class UI {
       this.players[0].ships.length === 0 &&
       this.players[1].ships.length === 0
     )
-      this.playing = true;
+      this.startGame();
     if (this.currentPlayer.ships.length === 0) this.changePlayer();
     if (this.currentPlayer.ai === true)
       this.cellClick(
         this.currentPlayer.getValidCoordinates(),
         this.currentPlayer,
       );
+  }
+
+  startGame() {
+    this.playing = true;
+    this.removeControls();
   }
 
   findHumanPlayer() {
@@ -141,6 +158,20 @@ class UI {
   }
 
   cellEnter(player, coordinates) {
+    // When playing display invalid and valid shots
+    if (player !== this.currentPlayer && this.playing === true) {
+      const cell = this.findCellFromCoordinates(
+        coordinates,
+        this.players.indexOf(player),
+      );
+      const usedLocation = player.gameBoard.isAlreadyUsed(coordinates);
+      if (usedLocation) {
+        cell.element.classList.add("invalid");
+      } else {
+        cell.element.classList.add("valid");
+      }
+      this.hoveringCells.push(cell);
+    }
     // Creates an array of all the ships positions
     if (player === this.currentPlayer && this.playing === false) {
       let coordinateArray = player.gameBoard.createCoordinatesFromDifference(

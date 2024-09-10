@@ -17,11 +17,9 @@ Bugs
 
 For tomorrow
 > Polish table
->> remove table when game starts
 
 > Some sort of feedback when hovering for attack
 >> Green border for valid shot, red for invalid
->> change cursor
 
 > Split up functions, isolating functionality
 >> placeShip - check if ship is already there
