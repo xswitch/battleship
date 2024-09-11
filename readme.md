@@ -13,13 +13,11 @@ TODO
 > Toasts - Notifications for errors, hits, misses and whatever
 
 Bugs
-
+> Active board stays on player 1 when placing ships. 
 
 For tomorrow
 > Polish table
 
-> Some sort of feedback when hovering for attack
->> Green border for valid shot, red for invalid
 
 > Split up functions, isolating functionality
 >> placeShip - check if ship is already there

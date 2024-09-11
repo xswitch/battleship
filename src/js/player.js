@@ -14,6 +14,18 @@ class Player {
     this.direction = "x";
   }
 
+  get direction() {
+    if (this.ai === true) {
+      const directions = ["x", "y"];
+      return directions[Math.floor(Math.random() * directions.length)];
+    }
+    return this._direction;
+  }
+
+  set direction(direction) {
+    this._direction = direction;
+  }
+
   changeRotation() {
     this.direction = this.direction === "x" ? "y" : "x";
   }
