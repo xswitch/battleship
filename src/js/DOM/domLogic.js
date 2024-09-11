@@ -361,6 +361,7 @@ class UI {
           this.players.indexOf(this.currentPlayer),
         ).element;
         cell.classList.remove("ship");
+        cell.classList.add("gridCell");
         cell.style = "";
       });
     });
