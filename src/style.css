@@ -128,7 +128,7 @@ body {
 
 .gridCell {
   border: 1px solid grey;
-}inherit
+}
 
 .active>.gridCell:hover {
   transition: all 0.2s;
@@ -144,7 +144,7 @@ div.hit {
 }
 
 .ship {
-  background-color: gray;
+  background-color: lightblue;
 }
 
 .results {

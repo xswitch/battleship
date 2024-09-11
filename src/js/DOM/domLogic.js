@@ -324,8 +324,8 @@ class UI {
           this.players.indexOf(this.currentPlayer),
         ).element;
         cell.classList.add("ship");
+        cell.classList.remove("gridCell");
         cell.style = this.createShipBorders(ship, index);
-        console.log(ship.direction);
       });
     });
   }
