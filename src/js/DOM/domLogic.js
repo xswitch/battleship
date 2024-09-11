@@ -12,6 +12,11 @@ class UI {
     this.playing = false;
     this.controlElements = [];
     this.hoveringCells = [];
+    this.tabs = {
+      startScreen: document.querySelector(".startScreen"),
+      content: document.querySelector(".content"),
+      endScreen: document.querySelector(".endScreen"),
+    };
     document.addEventListener("keydown", (event) => {
       this.rotateShip(event);
     });
@@ -26,6 +31,12 @@ class UI {
     };
     buttons.start.addEventListener("click", () => this.startGame());
     buttons.newGame.addEventListener("click", () => this.startGame());
+    buttons.home.addEventListener("click", () => this.home());
+  }
+
+  home() {
+    this.tabs.startScreen.classList.remove("hidden");
+    this.tabs.endScreen.classList.add("hidden");
   }
 
   startGame() {
@@ -35,12 +46,9 @@ class UI {
     */
     this.players = [new Player(), new Player(true)];
     [this.currentPlayer] = this.players;
-    const startScreen = document.querySelector(".startScreen");
-    startScreen.classList.add("hidden");
-    const content = document.querySelector(".content");
-    content.classList.remove("hidden");
-    const endScreen = document.querySelector(".endScreen");
-    endScreen.classList.add("hidden");
+    this.tabs.startScreen.classList.add("hidden");
+    this.tabs.content.classList.remove("hidden");
+    this.tabs.endScreen.classList.add("hidden");
     this.createBoards();
     this.createControls();
   }
@@ -54,8 +62,8 @@ class UI {
     this.boardElements = [];
     this.boards = [];
     this.controlElements = [];
-    document.querySelector(".content").classList.add("hidden");
-    document.querySelector(".endScreen").classList.remove("hidden");
+    this.tabs.content.classList.add("hidden");
+    this.tabs.endScreen.classList.remove("hidden");
   }
 
   rotateShip(event) {
@@ -147,7 +155,7 @@ class UI {
     if (player.gameBoard.receiveAttack(coordinates)) {
       if (player.gameBoard.allSunk()) {
         this.endGame();
-        return;
+        return false;
       }
       this.changePlayer();
       this.updateBoards();
@@ -310,13 +318,36 @@ class UI {
     this.currentPlayer.gameBoard.ships.forEach((ship) => {
       const coordinates =
         this.currentPlayer.gameBoard.createCoordinatesFromDifference(ship);
-      coordinates.forEach((coordinate) => {
-        this.findCellFromCoordinates(
+      coordinates.forEach((coordinate, index) => {
+        const cell = this.findCellFromCoordinates(
           coordinate,
           this.players.indexOf(this.currentPlayer),
-        ).element.classList.add("ship");
+        ).element;
+        cell.classList.add("ship");
+        cell.style = this.createShipBorders(ship, index);
+        console.log(ship.direction);
       });
     });
+  }
+
+  createShipBorders(ship, index) {
+    const properties = {
+      color: "green",
+      width: "2px",
+    };
+    const length = ship.ship.length - 1;
+    if (ship.direction === "x") {
+      if (index === 0)
+        return `border-bottom: ${properties.width} solid ${properties.color}; border-top: ${properties.width} solid ${properties.color}; border-left: ${properties.width} solid ${properties.color};`;
+      if (index === length)
+        return `border-bottom: ${properties.width} solid ${properties.color}; border-top: ${properties.width} solid ${properties.color}; border-right: ${properties.width} solid ${properties.color};`;
+      return `border-bottom: ${properties.width} solid ${properties.color}; border-top: ${properties.width} solid ${properties.color};`;
+    }
+    if (index === 0)
+      return `border-left: ${properties.width} solid ${properties.color}; border-top: ${properties.width} solid ${properties.color}; border-right: ${properties.width} solid ${properties.color};`;
+    if (index === length)
+      return `border-bottom: ${properties.width} solid ${properties.color}; border-right: ${properties.width} solid ${properties.color}; border-left: ${properties.width} solid ${properties.color};`;
+    return `border-left: ${properties.width} solid ${properties.color}; border-right: ${properties.width} solid ${properties.color};`;
   }
 
   removeShips() {
@@ -325,10 +356,12 @@ class UI {
       const coordinates =
         this.currentPlayer.gameBoard.createCoordinatesFromDifference(ship);
       coordinates.forEach((coordinate) => {
-        this.findCellFromCoordinates(
+        const cell = this.findCellFromCoordinates(
           coordinate,
           this.players.indexOf(this.currentPlayer),
-        ).element.classList.remove("ship");
+        ).element;
+        cell.classList.remove("ship");
+        cell.style = "";
       });
     });
   }

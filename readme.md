@@ -5,9 +5,12 @@ TODO
 # Polish site
 > Icons
 > Toasts - Notifications for errors, hits, misses and whatever
+> Info under boards with remaining ships
+> Get player info from home when starting game
+> 
 
 Bugs
-> Active board stays on player 1 when placing ships. 
+> Active board stays on player 1 when placing ships. 2player mode
 
 DOING NOW
 
@@ -17,9 +20,7 @@ DOING NOW
 >>> To play vs AI or Human
 >>> 
 
-> End Screen
->> Result and restart/home buttons - DONE, except button functionality
-
+> End screen scoreboard
 
 > Split up functions, isolating functionality
 >> placeShip - check if ship is already there
