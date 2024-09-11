@@ -332,7 +332,7 @@ class UI {
 
   createShipBorders(ship, index) {
     const properties = {
-      color: "green",
+      color: "black",
       width: "2px",
     };
     const length = ship.ship.length - 1;

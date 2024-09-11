@@ -30,3 +30,5 @@ DOING NOW
 >> Split up image into as many parts as ships length
 >>> Assign each part to each cell in turn
 >>> When rotating ship, rotate images as well
+
+Either save style when hovering or reuse borderCreation when creating the valid and invalid borders

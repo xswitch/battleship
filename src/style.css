@@ -112,7 +112,7 @@ body {
   border: 1px solid greenyellow;
 }
 
-.gridCell.valid {
+.valid {
   box-shadow: 0 0 10px 2px greenyellow;
   border: 1px solid greenyellow;
   z-index: 3;
@@ -120,14 +120,14 @@ body {
 }
 
 
-.gridCell.invalid {
+.invalid {
   box-shadow: 0 0 10px 2px red;
   border: 1px solid red;
   z-index: 3;
 }
 
 .gridCell {
-  border: 1px solid grey;
+  border: 1px solid lightgray;
 }
 
 .active>.gridCell:hover {
