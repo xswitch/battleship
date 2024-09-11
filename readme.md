@@ -3,9 +3,7 @@ TODO
 # Simple AI
 > Shoot close to same coordinates if it was a hit
 # Polish site
-> Options
 > Icons
-> End Screen
 > Toasts - Notifications for errors, hits, misses and whatever
 
 Bugs
@@ -18,6 +16,9 @@ DOING NOW
 >>> Choose amount of ships, names and length
 >>> To play vs AI or Human
 >>> 
+
+> End Screen
+>> Result and restart/home buttons - DONE, except button functionality
 
 
 > Split up functions, isolating functionality

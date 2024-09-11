@@ -25,15 +25,37 @@ class UI {
       home: document.querySelector(".home"),
     };
     buttons.start.addEventListener("click", () => this.startGame());
+    buttons.newGame.addEventListener("click", () => this.startGame());
   }
 
   startGame() {
+    /*
+    this players = getPlayers()
+    [this.currentPlayer] = this.players
+    */
+    this.players = [new Player(), new Player(true)];
+    [this.currentPlayer] = this.players;
     const startScreen = document.querySelector(".startScreen");
     startScreen.classList.add("hidden");
     const content = document.querySelector(".content");
     content.classList.remove("hidden");
+    const endScreen = document.querySelector(".endScreen");
+    endScreen.classList.add("hidden");
     this.createBoards();
     this.createControls();
+  }
+
+  endGame() {
+    this.playing = false;
+    this.players = [];
+    this.currentPlayer = undefined;
+    this.boardElements.forEach((board) => board.remove());
+    this.removeControls();
+    this.boardElements = [];
+    this.boards = [];
+    this.controlElements = [];
+    document.querySelector(".content").classList.add("hidden");
+    document.querySelector(".endScreen").classList.remove("hidden");
   }
 
   rotateShip(event) {
@@ -123,7 +145,10 @@ class UI {
 
   attackCell(coordinates, player) {
     if (player.gameBoard.receiveAttack(coordinates)) {
-      if (player.gameBoard.allSunk()) console.log(`Win`);
+      if (player.gameBoard.allSunk()) {
+        this.endGame();
+        return;
+      }
       this.changePlayer();
       this.updateBoards();
       this.cellLeave();
