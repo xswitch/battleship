@@ -75,7 +75,6 @@ body {
   box-shadow: 0 0 10px 2px red;
   border: 1px solid red;
   z-index: 3;
-  cursor: pointer;
 }
 
 .gridCell {
