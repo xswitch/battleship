@@ -5,12 +5,6 @@ import "./style.css";
 function driver() {
   const players = [new Player(), new Player(true)];
   const ui = new UI(players);
-
-  ui.createBoards();
-  ui.createControls();
-
-  ui.updateBoards();
-  ui.showShips(1);
 }
 
 driver();

@@ -2,11 +2,7 @@ TODO
 
 # Simple AI
 > Shoot close to same coordinates if it was a hit
-> Rotate ships
-# Placing of ships
-> Drag&Drop and sprites
 # Polish site
-> Start screen
 > Options
 > Icons
 > End Screen
@@ -15,8 +11,13 @@ TODO
 Bugs
 > Active board stays on player 1 when placing ships. 
 
-For tomorrow
-> Polish table
+DOING NOW
+
+> Start screen
+>> Options
+>>> Choose amount of ships, names and length
+>>> To play vs AI or Human
+>>> 
 
 
 > Split up functions, isolating functionality

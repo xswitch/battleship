@@ -14,6 +14,17 @@ class UI {
     document.addEventListener("keydown", (event) => {
       this.rotateShip(event);
     });
+    this.startButton = document.querySelector(".startGame");
+    this.startButton.addEventListener("click", () => this.startGame());
+  }
+
+  startGame() {
+    const startScreen = document.querySelector(".startScreen");
+    startScreen.classList.add("hidden");
+    const content = document.querySelector(".content");
+    content.classList.remove("hidden");
+    this.createBoards();
+    this.createControls();
   }
 
   rotateShip(event) {
@@ -132,7 +143,7 @@ class UI {
       this.players[0].ships.length === 0 &&
       this.players[1].ships.length === 0
     )
-      this.startGame();
+      this.startPlaying();
     if (this.currentPlayer.ships.length === 0) this.changePlayer();
     if (this.currentPlayer.ai === true)
       this.cellClick(
@@ -141,7 +152,7 @@ class UI {
       );
   }
 
-  startGame() {
+  startPlaying() {
     this.playing = true;
     this.removeControls();
   }
