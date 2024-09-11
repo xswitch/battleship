@@ -1,4 +1,5 @@
 /* eslint-disable prefer-destructuring */
+import Player from "../player";
 import Ship from "../ship";
 import El from "./createEl";
 
@@ -14,8 +15,16 @@ class UI {
     document.addEventListener("keydown", (event) => {
       this.rotateShip(event);
     });
-    this.startButton = document.querySelector(".startGame");
-    this.startButton.addEventListener("click", () => this.startGame());
+    this.setupButtons();
+  }
+
+  setupButtons() {
+    const buttons = {
+      start: document.querySelector(".startGame"),
+      newGame: document.querySelector(".newGame"),
+      home: document.querySelector(".home"),
+    };
+    buttons.start.addEventListener("click", () => this.startGame());
   }
 
   startGame() {

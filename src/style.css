@@ -28,7 +28,7 @@ body {
   height: 100%;
 }
 
-.startGame {
+.menuButton {
   width: 250px;
   height: 100px;
   font-size: 2rem;
@@ -39,11 +39,20 @@ body {
   color: white;
 }
 
-.startGame:hover {
+.menuButton:hover {
   cursor: pointer;
   box-shadow: 0 0 10px 1px white;
   text-shadow: gray 2px 0 10px;
   transition: all 0.2s;
+}
+
+.endScreen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  padding: 20%;
 }
 
 .content {
@@ -136,4 +145,10 @@ div.hit {
 
 .ship {
   background-color: gray;
+}
+
+.results {
+  grid-column: span 2;
+  color: white;
+  font-size: 5rem;
 }
