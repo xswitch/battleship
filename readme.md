@@ -1,7 +1,10 @@
 TODO
 
 # Simple AI
-> Shoot close to same coordinates if it was a hit
+> Shoot close to same coordinates if it was a hit -> change target if last shot sunk a ship
+>> If hit, record on player
+>>> getValidCoordinates() should check if lastShot !== undefined, if so return an adjacent tile if possible
+>>> lastShot should record coordinates -> check all directions for valid -> if nothing is valid, do normal shot
 # Polish site
 > Icons
 > Toasts - Notifications for errors, hits, misses and whatever
@@ -18,7 +21,6 @@ DOING NOW
 >> Options
 >>> Choose amount of ships, names and length
 >>> To play vs AI or Human
->>> 
 
 > End screen scoreboard
 
@@ -30,5 +32,3 @@ DOING NOW
 >> Split up image into as many parts as ships length
 >>> Assign each part to each cell in turn
 >>> When rotating ship, rotate images as well
-
-Either save style when hovering or reuse borderCreation when creating the valid and invalid borders

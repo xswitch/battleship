@@ -250,18 +250,20 @@ class UI {
       }
       // Gets all the elements based on coordinates
       coordinateArray.forEach((coordinate) => {
-        this.hoveringCells.push(
-          this.findCellFromCoordinates(
-            coordinate,
-            this.players.indexOf(player),
-          ),
+        const cell = this.findCellFromCoordinates(
+          coordinate,
+          this.players.indexOf(player),
         );
+        cell.style = cell.element.style.cssText;
+        this.hoveringCells.push(cell);
       });
       this.hoveringCells.forEach((cell) => {
         if (player.gameBoard.checkForShip(cell.coordinates) || tooBig) {
           cell.element.classList.add("invalid");
+          cell.element.style = "";
         } else {
           cell.element.classList.add("valid");
+          cell.element.style = "";
         }
       });
     }
@@ -271,6 +273,7 @@ class UI {
     this.hoveringCells.forEach((cell) => {
       cell.element.classList.remove("valid");
       cell.element.classList.remove("invalid");
+      cell.element.style = cell.style;
     });
     this.hoveringCells = [];
   }
