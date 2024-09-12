@@ -335,8 +335,8 @@ class UI {
 
   createShipBorders(ship, index) {
     const properties = {
-      color: "black",
-      width: "2px",
+      color: "gray",
+      width: "1px",
     };
     const length = ship.ship.length - 1;
     if (ship.direction === "x") {
