@@ -1,14 +1,11 @@
 TODO
 
 # Simple AI
-> change target if last shot sunk a ship
-> If no adjacent shots are valid, do normal shot (validShots.length === 0 || shipsLastShot > ships.length)
 # Polish site
 > Icons
 > Toasts - Notifications for errors, hits, misses and whatever
 > Info under boards with remaining ships
 > Get player info from home when starting game
-> 
 
 Bugs
 > Active board stays on player 1 when placing ships. 2player mode

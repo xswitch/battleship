@@ -2,6 +2,7 @@ import UI from "./js/DOM/domLogic";
 import createOptions from "./js/DOM/options";
 import Player from "./js/player";
 import "./style.css";
+import "toastify-js/src/toastify.css";
 
 function driver() {
   const ships = [

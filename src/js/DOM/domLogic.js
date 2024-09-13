@@ -1,4 +1,5 @@
 /* eslint-disable prefer-destructuring */
+import { toast } from "../notification";
 import Player from "../player";
 import Ship from "../ship";
 import El from "./createEl";
@@ -156,6 +157,23 @@ class UI {
     return this.boards[board][coordinates[1] * 10 + coordinates[0]];
   }
 
+  attackToast(player) {
+    const lastShot = player.gameBoard.getLast();
+    switch (lastShot.type) {
+      case "hit":
+        toast.success(`Hit!`);
+        break;
+      case "miss":
+        toast.info("Miss!");
+        break;
+      case "sunk":
+        toast.success("Ship sunk!");
+        break;
+      default:
+        break;
+    }
+  }
+
   attackCell(coordinates, player) {
     if (player.gameBoard.receiveAttack(coordinates)) {
       if (player.gameBoard.allSunk()) {
@@ -165,6 +183,7 @@ class UI {
       this.changePlayer();
       this.updateBoards();
       this.cellLeave();
+      this.attackToast(player);
     } else {
       console.log("Already Used");
     }
