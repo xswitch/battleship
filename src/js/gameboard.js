@@ -93,7 +93,7 @@ class GameBoard {
       this.hits.push(coordinates);
       this.#lastShot.type = "hit";
     }
-    if (this.remainingShips() !== shipsBeforeShot) this.#lastShot.type = "sunk";
+    if (this.remainingShips() > shipsBeforeShot) this.#lastShot.type = "sunk";
     this.#lastShot.coordinates = coordinates;
     return true;
   }

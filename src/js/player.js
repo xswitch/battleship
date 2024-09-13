@@ -56,7 +56,10 @@ class Player {
   getRandomNearby() {
     const nearbyArray = this.gameBoard.findNewFromLast();
     const randomChoice = Math.floor(Math.random() * nearbyArray.length);
-    return nearbyArray[randomChoice];
+    if (nearbyArray.length !== 0) {
+      return nearbyArray[randomChoice];
+    }
+    return this.getValidCoordinates();
   }
 
   getValidCoordinates() {
