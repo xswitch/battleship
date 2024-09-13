@@ -1,4 +1,11 @@
 class GameBoard {
+  #lastShot = {
+    coordinates: undefined,
+    type: undefined,
+  };
+
+  #shipsOnLastShot = undefined;
+
   constructor() {
     this.ships = [];
     this.hits = [];
@@ -79,11 +86,37 @@ class GameBoard {
     const { ship } = this.checkForShip(coordinates);
     if (ship === undefined) {
       this.misses.push(coordinates);
+      this.#lastShot.type = "miss";
     } else {
       ship.hit();
       this.hits.push(coordinates);
+      this.#lastShot.type = "hit";
     }
+    this.#lastShot.coordinates = coordinates;
     return true;
+  }
+
+  findNewFromLast() {
+    const { coordinates } = this.#lastShot;
+    const coordinateArray = [
+      [coordinates[0] + 1, coordinates[1]],
+      [coordinates[0] - 1, coordinates[1]],
+      [coordinates[0], coordinates[1] + 1],
+      [coordinates[0], coordinates[1] - 1],
+    ];
+
+    const inBoundsArray = coordinateArray.filter(
+      (coordinate) => !this.outOfBounds(coordinate[0], coordinate[1]),
+    );
+    const unusedCoordinates = inBoundsArray.filter(
+      (coordinate) => !this.isAlreadyUsed(coordinate),
+    );
+
+    return unusedCoordinates;
+  }
+
+  getLast() {
+    return this.#lastShot;
   }
 
   allSunk() {

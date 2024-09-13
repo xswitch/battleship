@@ -6,6 +6,7 @@ describe("Gameboard class", () => {
   const gameBoard = new GameBoard();
   gameBoard.placeShip([0, 0], new Ship(3), "x");
   gameBoard.placeShip([0, 1], new Ship(3), "y");
+  gameBoard.placeShip([3, 8], new Ship(3), "x");
 
   it("should place Ships at coords", () => {
     expect(gameBoard.ships[1].y).toBe(1);
@@ -47,5 +48,10 @@ describe("Gameboard class", () => {
 
   it("should not place out of bounds", () => {
     expect(gameBoard.placeShip([8, 8], new Ship(3))).toBe(false);
+  });
+
+  it("should record last shot and wether it was hit/miss", () => {
+    gameBoard.receiveAttack([0, 1]);
+    expect(gameBoard.getLast()).toEqual({ coordinates: [0, 1], type: "hit" });
   });
 });

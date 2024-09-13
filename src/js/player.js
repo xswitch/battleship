@@ -53,6 +53,12 @@ class Player {
     return [num1, num2];
   }
 
+  getRandomNearby() {
+    const nearbyArray = this.gameBoard.findNewFromLast();
+    const randomChoice = Math.floor(Math.random() * nearbyArray.length);
+    return nearbyArray[randomChoice];
+  }
+
   getValidCoordinates() {
     const randomCoords = this.randomCoordinates();
     if (this.gameBoard.isAlreadyUsed(randomCoords)) {

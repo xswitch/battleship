@@ -141,8 +141,13 @@ class UI {
       this.boardElements[0].classList.remove("active");
       this.boardElements[1].classList.add("active");
     }
-    if (this.currentPlayer.ai === true)
-      this.cellClick(oldPlayer.getValidCoordinates(), oldPlayer);
+    if (this.currentPlayer.ai === true) {
+      if (oldPlayer.gameBoard.getLast().type === "hit") {
+        this.cellClick(oldPlayer.getRandomNearby(), oldPlayer);
+      } else {
+        this.cellClick(oldPlayer.getValidCoordinates(), oldPlayer);
+      }
+    }
 
     this.showShips();
   }
