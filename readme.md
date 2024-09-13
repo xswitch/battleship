@@ -1,10 +1,8 @@
 TODO
 
 # Simple AI
-> Shoot close to same coordinates if it was a hit -> change target if last shot sunk a ship
->> If hit, record on player
->>> getValidCoordinates() should check if lastShot !== undefined, if so return an adjacent tile if possible
->>> lastShot should record coordinates -> check all directions for valid -> if nothing is valid, do normal shot
+> change target if last shot sunk a ship
+> If no adjacent shots are valid, do normal shot (validShots.length === 0 || shipsLastShot > ships.length)
 # Polish site
 > Icons
 > Toasts - Notifications for errors, hits, misses and whatever

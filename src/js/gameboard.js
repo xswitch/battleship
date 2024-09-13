@@ -83,6 +83,7 @@ class GameBoard {
 
   receiveAttack(coordinates) {
     if (this.isAlreadyUsed(coordinates)) return false;
+    const shipsBeforeShot = this.remainingShips();
     const { ship } = this.checkForShip(coordinates);
     if (ship === undefined) {
       this.misses.push(coordinates);
@@ -92,6 +93,7 @@ class GameBoard {
       this.hits.push(coordinates);
       this.#lastShot.type = "hit";
     }
+    if (this.remainingShips() !== shipsBeforeShot) this.#lastShot.type = "sunk";
     this.#lastShot.coordinates = coordinates;
     return true;
   }
@@ -117,6 +119,10 @@ class GameBoard {
 
   getLast() {
     return this.#lastShot;
+  }
+
+  remainingShips() {
+    return this.ships.filter((ship) => !ship.ship.sunk).length;
   }
 
   allSunk() {
