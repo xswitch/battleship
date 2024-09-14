@@ -3,7 +3,6 @@ TODO
 # Simple AI
 # Polish site
 > Icons
-> Toasts - Notifications for errors, hits, misses and whatever
 > Info under boards with remaining ships
 > Get player info from home when starting game
 
@@ -11,6 +10,8 @@ Bugs
 > Active board stays on player 1 when placing ships. 2player mode
 
 DOING NOW
+
+> Display toasts for each player under their board instead of just in bottom right corner
 
 > Start screen
 >> Options

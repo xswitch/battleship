@@ -1,23 +1,24 @@
 import Toastify from "toastify-js";
 
 const toast = (function () {
-  function success(toastText) {
+  function success(toastText, position) {
     Toastify({
       text: toastText,
       className: "toastSuccess",
       style: {
-        background: "rgb(100, 250, 100)",
+        background: "rgb(50, 250, 50)",
         color: "black",
         borderRadius: "5px",
       },
-      duration: 4000,
+      duration: 2000,
+      position,
       close: true,
       gravity: "bottom", // `top` or `bottom`
       stopOnFocus: true, // Prevents dismissing of toast on hover,
     }).showToast();
   }
 
-  function error(toastText) {
+  function error(toastText, position) {
     Toastify({
       text: toastText,
       className: "toastError",
@@ -26,19 +27,21 @@ const toast = (function () {
         color: "black",
         borderRadius: "5px",
       },
-      duration: 4000,
+      duration: 2000,
+      position,
       close: true,
       gravity: "bottom", // `top` or `bottom`
       stopOnFocus: true, // Prevents dismissing of toast on hover,
     }).showToast();
   }
 
-  function info(toastText) {
+  function info(toastText, position) {
     Toastify({
       text: toastText,
       className: "toastInfo",
-      duration: 6000,
+      duration: 2000,
       close: true,
+      position,
       gravity: "bottom", // `top` or `bottom`
       stopOnFocus: true, // Prevents dismissing of toast on hover,
     }).showToast();
@@ -47,7 +50,7 @@ const toast = (function () {
   return { success, error, info };
 })();
 
-export { toast };
+export default toast;
 
 /* 
 Standard amount of elements for notification popup

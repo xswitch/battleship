@@ -1,5 +1,5 @@
 /* eslint-disable prefer-destructuring */
-import { toast } from "../notification";
+import toast from "../notification";
 import Player from "../player";
 import Ship from "../ship";
 import El from "./createEl";
@@ -159,15 +159,16 @@ class UI {
 
   attackToast(player) {
     const lastShot = player.gameBoard.getLast();
+    const playerSide = this.players.indexOf(player) === 0 ? "left" : "right";
     switch (lastShot.type) {
       case "hit":
-        toast.success(`Hit!`);
+        toast.success("Hit!", playerSide);
         break;
       case "miss":
-        toast.info("Miss!");
+        toast.info("Miss!", playerSide);
         break;
       case "sunk":
-        toast.success("Ship sunk!");
+        toast.success("Ship sunk!", playerSide);
         break;
       default:
         break;
