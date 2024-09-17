@@ -12,6 +12,7 @@ function createOptions(ships) {
     }).element,
     titleRow: {},
     ships: [],
+    inputs: {},
   };
   shipOptions.title = new El("h1", {
     classes: "optionsTitle",
@@ -63,6 +64,29 @@ function createOptions(ships) {
     newShip.container = container;
     shipOptions.ships.push(newShip);
   });
+  shipOptions.inputs.container = new El("div", {
+    classes: "optionsRow",
+    parent: shipOptions.container,
+  }).element;
+  shipOptions.inputs = {
+    name: new El("input", {
+      classes: "optionsInput",
+      parent: shipOptions.inputs.container,
+    }),
+    length: new El("input", {
+      classes: "optionsInput",
+      parent: shipOptions.inputs.container,
+    }),
+    amount: new El("input", {
+      classes: "optionsInput",
+      parent: shipOptions.inputs.container,
+    }),
+    button: new El("button", {
+      classes: "optionsButton",
+      parent: shipOptions.container,
+      text: "NEW SHIP",
+    }),
+  };
   return shipOptions;
 }
 

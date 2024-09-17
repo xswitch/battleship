@@ -1,6 +1,5 @@
 TODO
 
-# Simple AI
 # Polish site
 > Icons
 > Info under boards with remaining ships
@@ -11,9 +10,6 @@ Bugs
 
 DOING NOW
 
-> Display toasts for each player under their board instead of just in bottom right corner
-
-> Start screen
 >> Options
 >>> Choose amount of ships, names and length
 >>> To play vs AI or Human

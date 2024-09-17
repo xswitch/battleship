@@ -55,6 +55,7 @@ class UI {
   }
 
   endGame() {
+    this.cellLeave();
     this.playing = false;
     this.players = [];
     this.currentPlayer = undefined;

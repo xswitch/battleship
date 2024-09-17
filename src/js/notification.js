@@ -1,6 +1,6 @@
 import Toastify from "toastify-js";
 
-const toast = (function () {
+const toast = (() => {
   function success(toastText, position) {
     Toastify({
       text: toastText,
@@ -12,7 +12,6 @@ const toast = (function () {
       },
       duration: 2000,
       position,
-      close: true,
       gravity: "bottom", // `top` or `bottom`
       stopOnFocus: true, // Prevents dismissing of toast on hover,
     }).showToast();
@@ -29,7 +28,6 @@ const toast = (function () {
       },
       duration: 2000,
       position,
-      close: true,
       gravity: "bottom", // `top` or `bottom`
       stopOnFocus: true, // Prevents dismissing of toast on hover,
     }).showToast();
@@ -40,7 +38,6 @@ const toast = (function () {
       text: toastText,
       className: "toastInfo",
       duration: 2000,
-      close: true,
       position,
       gravity: "bottom", // `top` or `bottom`
       stopOnFocus: true, // Prevents dismissing of toast on hover,
