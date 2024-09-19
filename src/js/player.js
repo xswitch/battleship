@@ -6,8 +6,10 @@ class Player {
   constructor(ships, ai = false) {
     this.gameBoard = new GameBoard();
     this.ai = ai;
-    this.ships = ships;
+    this.ships = [...ships];
     this.direction = "x";
+
+    console.log(this.ships);
   }
 
   get direction() {
@@ -33,7 +35,7 @@ class Player {
 
   checkShip() {
     if (this.ships.length === 0) return false;
-    if (this.ships[0].amount === 0) {
+    if (this.ships[0].amount <= 0) {
       this.ships.shift();
     }
     return true;
