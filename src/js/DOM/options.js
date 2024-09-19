@@ -10,6 +10,10 @@ function createOptions(ships) {
       classes: "shipOptions",
       parent: optionsContainer,
     }).element,
+    inputContainer: new El("div", {
+      classes: "shipOptions",
+      parent: optionsContainer,
+    }),
     titleRow: {},
     ships: [],
     inputs: {},
@@ -39,7 +43,8 @@ function createOptions(ships) {
     text: "AMOUNT",
     parent: shipOptions.titleRow.container,
   });
-  ships.forEach((ship) => {
+
+  function addShip(name, length, amount) {
     const container = new El("div", {
       classes: "optionsRow",
       parent: shipOptions.container,
@@ -48,25 +53,30 @@ function createOptions(ships) {
       name: new El("h2", {
         classes: "optionsText",
         parent: container,
-        text: ship.name,
+        text: name,
       }),
       length: new El("h2", {
         classes: "optionsText",
         parent: container,
-        text: ship.length,
+        text: length,
       }),
       amount: new El("h2", {
         classes: "optionsText",
         parent: container,
-        text: ship.amount,
+        text: amount,
       }),
     };
     newShip.container = container;
     shipOptions.ships.push(newShip);
+  }
+
+  ships.forEach((ship) => {
+    addShip(ship.name, ship.length, ship.amount);
   });
+
   shipOptions.inputs.container = new El("div", {
     classes: "optionsRow",
-    parent: shipOptions.container,
+    parent: shipOptions.inputContainer.element,
   }).element;
   shipOptions.inputs = {
     name: new El("input", {
@@ -83,11 +93,27 @@ function createOptions(ships) {
     }),
     button: new El("button", {
       classes: "optionsButton",
-      parent: shipOptions.container,
+      parent: shipOptions.inputContainer.element,
       text: "NEW SHIP",
     }),
   };
-  return shipOptions;
+
+  shipOptions.inputs.button.element.addEventListener("click", () => {
+    addShip(
+      shipOptions.inputs.name.element.value,
+      shipOptions.inputs.length.element.value,
+      shipOptions.inputs.amount.element.value,
+    );
+  });
+
+  function getShips() {
+    return shipOptions.ships.map((ship) => ({
+      name: ship.name.text,
+      length: ship.length.text,
+      amount: ship.amount.text,
+    }));
+  }
+  return { getShips };
 }
 
 export default createOptions;

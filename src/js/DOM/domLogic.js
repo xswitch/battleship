@@ -3,12 +3,22 @@ import toast from "../notification";
 import Player from "../player";
 import Ship from "../ship";
 import El from "./createEl";
+import createOptions from "./options";
 
 class UI {
-  constructor(players) {
-    this.players = players;
+  #ships = [
+    { name: "Destroyer", length: 2, amount: 2 },
+    { name: "Submarine", length: 3, amount: 2 },
+    { name: "Cruiser", length: 3, amount: 1 },
+    { name: "Battleship", length: 4, amount: 1 },
+    { name: "Carrier", length: 5, amount: 1 },
+  ];
+
+  constructor() {
+    this.options = createOptions(this.#ships);
+    this.players = undefined;
     this.boards = [];
-    [this.currentPlayer] = this.players;
+    this.currentPlayer = undefined;
     this.boardElements = [];
     this.playing = false;
     this.controlElements = [];
@@ -45,7 +55,11 @@ class UI {
     this players = getPlayers()
     [this.currentPlayer] = this.players
     */
-    this.players = [new Player(), new Player(true)];
+    this.#ships = this.options.getShips();
+    this.players = [
+      new Player(this.#ships, false),
+      new Player(this.#ships, true),
+    ];
     [this.currentPlayer] = this.players;
     this.tabs.startScreen.classList.add("hidden");
     this.tabs.content.classList.remove("hidden");

@@ -1,16 +1,12 @@
 import GameBoard from "./gameboard";
 
 class Player {
-  constructor(ai = false) {
+  #direction = undefined;
+
+  constructor(ships, ai = false) {
     this.gameBoard = new GameBoard();
     this.ai = ai;
-    this.ships = [
-      { name: "Destroyer", length: 2, amount: 2 },
-      { name: "Submarine", length: 3, amount: 2 },
-      { name: "Cruiser", length: 3, amount: 1 },
-      { name: "Battleship", length: 4, amount: 1 },
-      { name: "Carrier", length: 5, amount: 1 },
-    ];
+    this.ships = ships;
     this.direction = "x";
   }
 
@@ -19,11 +15,11 @@ class Player {
       const directions = ["x", "y"];
       return directions[Math.floor(Math.random() * directions.length)];
     }
-    return this._direction;
+    return this.#direction;
   }
 
   set direction(direction) {
-    this._direction = direction;
+    this.#direction = direction;
   }
 
   changeRotation() {
