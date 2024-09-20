@@ -10,7 +10,7 @@ function validateInputs(ships, inputs) {
   );
   const newSize = currentSize + length * amount;
 
-  if (newSize < 100 && length <= 10 && length > 0) return true;
+  if (newSize < 100 && length <= 10 && length > 0 && name !== "") return true;
 
   if (newSize > 100) toast.error("Exceeded total size");
   if (length > 10) toast.error("Max Length Exceeded");

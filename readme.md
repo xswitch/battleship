@@ -8,9 +8,6 @@ Bugs
 
 DOING NOW
 
-
-> Style options inputs
-
 > End screen scoreboard
 
 > Clean up classes
