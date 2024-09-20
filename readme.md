@@ -8,14 +8,16 @@ Bugs
 
 DOING NOW
 
-> Validation -> total length not greater than board size -> Name under a certain amount of characters
+> Validation
+>> Name -> Capitalize first letter, min length and max length
+>> Length -> Cannot be <= 0 or > gameBoard.size
+>> Amount -> Amount * Length cannot exceed total gridSize, gameBoard.size^2
+
+> Remove ship on click
+>> Cannot start game if no ships are made
 
 > Style options inputs
 
 > End screen scoreboard
 
-> ERROR - Both players use up the same ships, since it's a reference
-
-> Split up functions, isolating functionality
->> placeShip - check if ship is already there
->> Clean up gameboard class. Move stuff over to player class
+> Clean up classes

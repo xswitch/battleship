@@ -69,6 +69,7 @@ class UI {
   }
 
   endGame() {
+    // this.currentPlayer is the player that is currently attacking, so if i win it's me
     this.cellLeave();
     this.playing = false;
     this.players = [];

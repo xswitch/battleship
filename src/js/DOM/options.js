@@ -46,7 +46,7 @@ function createOptions(ships) {
 
   function addShip(name, length, amount) {
     const container = new El("div", {
-      classes: "optionsRow",
+      classes: "optionsRow option",
       parent: shipOptions.container,
     }).element;
     const newShip = {
@@ -78,22 +78,35 @@ function createOptions(ships) {
     classes: "optionsRow",
     parent: shipOptions.inputContainer.element,
   }).element;
+  shipOptions.inputs.buttonContainer = new El("div", {
+    classes: "optionsRow",
+    parent: shipOptions.inputContainer.element,
+  }).element;
   shipOptions.inputs = {
     name: new El("input", {
       classes: "optionsInput",
       parent: shipOptions.inputs.container,
+      properties: {
+        placeholder: "NAME",
+      },
     }),
     length: new El("input", {
       classes: "optionsInput",
       parent: shipOptions.inputs.container,
+      properties: {
+        placeholder: "LENGTH",
+      },
     }),
     amount: new El("input", {
       classes: "optionsInput",
       parent: shipOptions.inputs.container,
+      properties: {
+        placeholder: "AMOUNT",
+      },
     }),
     button: new El("button", {
       classes: "optionsButton",
-      parent: shipOptions.inputContainer.element,
+      parent: shipOptions.inputs.buttonContainer,
       text: "NEW SHIP",
     }),
   };
