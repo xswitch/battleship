@@ -1,4 +1,5 @@
 import El from "./createEl";
+import validateInputs from "./shipValidation";
 
 function createOptions(ships) {
   const optionsContainer = new El("div", {
@@ -100,7 +101,8 @@ function createOptions(ships) {
       classes: "optionsInput",
       parent: shipOptions.inputs.container,
       properties: {
-        placeholder: "LENGTH",
+        placeholder: "LENGTH (1-10)",
+        type: "number",
       },
     }),
     amount: new El("input", {
@@ -108,6 +110,7 @@ function createOptions(ships) {
       parent: shipOptions.inputs.container,
       properties: {
         placeholder: "AMOUNT",
+        type: "number",
       },
     }),
     button: new El("button", {
@@ -117,14 +120,6 @@ function createOptions(ships) {
     }),
   };
 
-  shipOptions.inputs.button.element.addEventListener("click", () => {
-    addShip(
-      shipOptions.inputs.name.element.value,
-      shipOptions.inputs.length.element.value,
-      shipOptions.inputs.amount.element.value,
-    );
-  });
-
   function getShips() {
     return shipOptions.ships.map((ship) => ({
       name: ship.name.text,
@@ -132,6 +127,16 @@ function createOptions(ships) {
       amount: ship.amount.text,
     }));
   }
+
+  shipOptions.inputs.button.element.addEventListener("click", () => {
+    if (validateInputs(getShips(), shipOptions.inputs)) {
+      addShip(
+        shipOptions.inputs.name.element.value,
+        shipOptions.inputs.length.element.value,
+        shipOptions.inputs.amount.element.value,
+      );
+    }
+  });
   return { getShips };
 }
 

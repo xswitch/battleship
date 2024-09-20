@@ -56,6 +56,10 @@ class UI {
     [this.currentPlayer] = this.players
     */
     this.#ships = this.options.getShips();
+    if (this.#ships.length === 0) {
+      toast.error("NO SHIPS");
+      return;
+    }
     this.players = [
       new Player(this.#ships, false),
       new Player(this.#ships, true),
