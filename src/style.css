@@ -212,3 +212,19 @@ h1.optionsTitle {
   color: black;
   cursor: pointer;
 }
+
+.shipOptions:not(.inputContainer) {
+  border: 1px solid white;
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoContainer {
+  color: white;
+  height: 2rem;
+  text-align: center;
+}

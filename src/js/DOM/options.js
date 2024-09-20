@@ -12,7 +12,7 @@ function createOptions(ships) {
       parent: optionsContainer,
     }).element,
     inputContainer: new El("div", {
-      classes: "shipOptions",
+      classes: "shipOptions inputContainer",
       parent: optionsContainer,
     }),
     titleRow: {},

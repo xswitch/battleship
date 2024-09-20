@@ -18,6 +18,7 @@ class UI {
     this.options = createOptions(this.#ships);
     this.players = [];
     this.boards = [];
+    this.info = [];
     this.currentPlayer = undefined;
     this.boardElements = [];
     this.playing = false;
@@ -70,6 +71,7 @@ class UI {
     this.tabs.endScreen.classList.add("hidden");
     this.createBoards();
     this.createControls();
+    this.createInfo();
   }
 
   endGame() {
@@ -201,7 +203,7 @@ class UI {
         this.endGame();
         return false;
       }
-      this.remaining();
+      this.updateInfo();
       this.changePlayer();
       this.updateBoards();
       this.cellLeave();
@@ -243,6 +245,7 @@ class UI {
   startPlaying() {
     this.playing = true;
     this.removeControls();
+    this.updateInfo();
   }
 
   findHumanPlayer() {
@@ -428,9 +431,32 @@ class UI {
     });
   }
 
-  remaining() {
-    const shipsLeft = this.currentPlayer.gameBoard.remainingShips();
-    console.log(shipsLeft);
+  createInfo() {
+    for (let index = 0; index < this.players.length; index += 1) {
+      const boardElement = document.querySelector(
+        `.boardContainer${index + 1}`,
+      );
+      const infoContainer = new El("div", {
+        classes: "infoContainer",
+        parent: boardElement,
+      });
+      this.info[index] = {
+        container: infoContainer,
+        shipsLeft: new El("h2", {
+          classes: "infoText",
+          parent: infoContainer.element,
+          text: ``,
+        }),
+      };
+    }
+  }
+
+  updateInfo() {
+    for (let index = 0; index < this.players.length; index += 1) {
+      const player = this.players[index];
+      this.info[index].shipsLeft.text =
+        `Ships left: ${player.gameBoard.remainingShips()}`;
+    }
   }
 }
 
