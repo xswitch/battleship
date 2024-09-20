@@ -67,6 +67,12 @@ function createOptions(ships) {
       }),
     };
     newShip.container = container;
+    newShip.container.addEventListener("click", () => {
+      const index = shipOptions.ships.indexOf(newShip);
+      shipOptions.ships.splice(index, 1);
+      newShip.container.remove();
+      console.log(shipOptions.ships);
+    });
     shipOptions.ships.push(newShip);
   }
 
