@@ -6,10 +6,8 @@ class Player {
   constructor(ships, ai = false) {
     this.gameBoard = new GameBoard();
     this.ai = ai;
-    this.ships = [...ships];
+    this.ships = ships;
     this.direction = "x";
-
-    console.log(this.ships);
   }
 
   get direction() {

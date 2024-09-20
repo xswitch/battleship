@@ -16,7 +16,7 @@ class UI {
 
   constructor() {
     this.options = createOptions(this.#ships);
-    this.players = undefined;
+    this.players = [];
     this.boards = [];
     this.currentPlayer = undefined;
     this.boardElements = [];
@@ -61,8 +61,8 @@ class UI {
       return;
     }
     this.players = [
-      new Player(this.#ships, false),
-      new Player(this.#ships, true),
+      new Player(this.options.getShips(), false),
+      new Player(this.options.getShips(), true),
     ];
     [this.currentPlayer] = this.players;
     this.tabs.startScreen.classList.add("hidden");
@@ -201,6 +201,7 @@ class UI {
         this.endGame();
         return false;
       }
+      this.remaining();
       this.changePlayer();
       this.updateBoards();
       this.cellLeave();
@@ -425,6 +426,11 @@ class UI {
         this.findCellFromCoordinates(miss, index).element.classList.add("miss");
       });
     });
+  }
+
+  remaining() {
+    const shipsLeft = this.currentPlayer.gameBoard.remainingShips();
+    console.log(shipsLeft);
   }
 }
 
