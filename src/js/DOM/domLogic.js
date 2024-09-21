@@ -236,9 +236,7 @@ class UI {
     ) {
       player.useShip();
       this.cellLeave();
-    } else {
-      toast.error("Invalid Placement");
-    }
+    } else if (player.ai !== true) toast.error("Invalid Placement");
 
     this.showShips(this.players.indexOf(player));
     this.updateControls();
