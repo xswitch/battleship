@@ -77,6 +77,7 @@ class UI {
   endGame() {
     // this.currentPlayer is the player that is currently attacking, so if i win it's me
     this.cellLeave();
+    this.updateResults();
     this.playing = false;
     this.players = [];
     this.currentPlayer = undefined;
@@ -87,6 +88,16 @@ class UI {
     this.controlElements = [];
     this.tabs.content.classList.add("hidden");
     this.tabs.endScreen.classList.remove("hidden");
+  }
+
+  updateResults() {
+    const resultText = document.querySelector(".results");
+    console.log(this.currentPlayer);
+    if (this.currentPlayer.ai === true) {
+      resultText.textContent = "AI Won!";
+    } else {
+      resultText.textContent = "You Won!";
+    }
   }
 
   rotateShip(event) {
@@ -225,6 +236,8 @@ class UI {
     ) {
       player.useShip();
       this.cellLeave();
+    } else {
+      toast.error("Invalid Placement");
     }
 
     this.showShips(this.players.indexOf(player));
